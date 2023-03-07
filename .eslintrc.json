@@ -1,0 +1,16 @@
+{
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": ["airbnb", "prettier", "plugin:prettier/recommended"],
+	"plugins": ["prettier"],
+	"rules": {
+		"prettier/prettier": "warn",
+		"no-unused-vars": "warn",
+		"no-console": "off",
+		"spaced-comment": "warn",
+		"no-plusplus": "off",
+		"no-alert": "off"
+	}
+}
