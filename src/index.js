@@ -1,1 +1,1 @@
-// index.js
+import './styles/main.sass';
