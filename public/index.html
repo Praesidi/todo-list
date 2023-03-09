@@ -76,7 +76,30 @@
         </div>
       </div>
       <div class="main-container">
-        <h2>Today</h2>
+        <h2 id="current-page-title">Today</h2>
+        <div class="task-container">
+          <div class="task-item">
+            <div class="task-item-check">
+              <input type="radio" />
+              <p>Task</p>
+            </div>
+            <div class="task-item-btns">
+              <button title="Edit" id="edit-task">
+                <i class="fa-solid fa-pen-to-square fa-fw"></i>
+              </button>
+              <button title="Show info" id="show-task-info">
+                <i class="fa-solid fa-circle-info fa-fw"></i>
+              </button>
+              <button title="Mark as important" id="mark-important-task">
+                <i class="fa-regular fa-star fa-fw"></i>
+                <!-- <i class="fa-solid fa-star"></i> -->
+              </button>
+              <button title="Delete" id="delete-task">
+                <i class="fa-solid fa-trash-can fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <footer class="footer">
