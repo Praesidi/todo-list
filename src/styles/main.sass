@@ -25,7 +25,7 @@ h1, h2, h3
   margin: 0
 
 
-/* header */ 
+/* Header */ 
 .header
   display: flex
   justify-content: space-evenly
@@ -53,12 +53,12 @@ h1, h2, h3
   span
     color: $white
 
-/* main */
+/* Main */
 .main 
   display: grid
   grid-template-columns: repeat(12, 1fr)
 
-/* main -> sidebar */  
+/* Main -> Sidebar */  
 .sidebar
   box-sizing: border-box
   grid-column: 1 / 4
@@ -72,6 +72,7 @@ h1, h2, h3
     padding-bottom: 10px
     margin-top: 10px 
 
+/* Main -> Sidebar -> Menu Btns */ 
 .sidebar-btns-container
   display: flex
   flex-direction: column
@@ -119,13 +120,14 @@ h1, h2, h3
     .fa-calendar-check
       color:#059669
 
+/* Main -> Sidebar -> Projects */ 
 .new-project-btn-container
   display: flex
   justify-content: center
   width: 100%
   margin: 10px 0
 
-  button
+  & > button
     width: 100%
     padding: 10px
     background: transparent
@@ -161,13 +163,16 @@ h1, h2, h3
   border-radius: 5px
   padding: 10px 10px 10px 20px
 
+.project-info
   p
     margin: 0
     white-space: nowrap
     overflow: hidden
     text-overflow: ellipsis
 
-  button
+
+.project-menu
+  & > button
     margin-left: 5px
     background: transparent
     border: none
@@ -180,8 +185,66 @@ h1, h2, h3
       transition: .2s
       scale: 1.2
 
+.project-popup-menu
+  visibility: visible
+  position: absolute
+  display: flex
+  flex-direction: column
+  justify-content: center
+  padding: 5px
+  gap: 5px
+  border-radius: 5px
+  background: $light-gray
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
 
-/* New Task Modal */  
+  button
+    display: block  
+    width: 100%
+    background: transparent 
+    border: none
+    border-radius: 5px
+    padding: 5px
+
+    &:hover
+      background: $extra-light-gray
+      color: $primary-color
+
+/* Main -> Container*/  
+.main-container
+  grid-column: 4 / 13
+  padding: 15px
+
+  h2
+    margin-top: 10px
+    text-align: center
+
+/* Footer */    
+.footer 
+  background: $light-gray
+  height: $footer-height
+  display: flex
+  justify-content: center
+  align-items: center
+  font-family: 'Sono', sans-serif
+
+  p
+    text-align: center
+    font-weight: 500
+    color: $black
+  
+  a 
+    text-decoration: none
+    font-weight: 700
+    transition: 0.4s
+    color: $primary-color
+
+    &:hover
+      font-size: 1.1rem
+    &:visited 
+      text-decoration: none
+      color: $primary-color
+
+/* Modal */  
 #new-task-modal
   display: flex
   flex-direction: column
@@ -201,7 +264,7 @@ h1, h2, h3
   h2
     margin-bottom: 20px
 
-/* Close Modal Button*/
+/* Modal -> Close Modal Button*/
 .modal-close-btn
   width: 100%
   display: flex
@@ -225,7 +288,7 @@ h1, h2, h3
       &:active 
         scale: 0.9
 
-/* Create Task Form*/
+/* Modal -> Create Task Form*/
 #create-task-form
   display: flex
   flex-direction: column
@@ -274,38 +337,3 @@ h1, h2, h3
       scale: 1
       transition: .1s
     
-
-/* main -> container*/  
-.main-container
-  grid-column: 4 / 13
-  padding: 15px
-
-  h2
-    margin-top: 10px
-    text-align: center
-
-/* footer */    
-.footer 
-  background: $light-gray
-  height: $footer-height
-  display: flex
-  justify-content: center
-  align-items: center
-  font-family: 'Sono', sans-serif
-
-  p
-    text-align: center
-    font-weight: 500
-    color: $black
-  
-  a 
-    text-decoration: none
-    font-weight: 700
-    transition: 0.4s
-    color: $primary-color
-
-    &:hover
-      font-size: 1.1rem
-    &:visited 
-      text-decoration: none
-      color: $primary-color
