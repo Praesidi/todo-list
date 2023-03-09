@@ -4,17 +4,81 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/favicon.ico" />
+    <link rel="icon" href="../src/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600&family=Noto+Sans+JP:wght@100;300;400;500;700&family=Sono:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    <script type="text/javascript" src="src/index.js" defer></script>
-    <title>Title</title>
+    <script type="text/javascript" src="../src/index.js" defer></script>
+    <title>to.do</title>
   </head>
   <body>
-    <header>
-      <h1>Test Test</h1>
+    <header class="header">
+      <div class="hamburger-menu-container"></div>
+      <div class="logo-container">
+        <img src="../src/img/logo.png" alt="" />
+        <p>to<span>.do</span></p>
+      </div>
+      <div class="color-mode-container"></div>
     </header>
+    <main class="main">
+      <div class="sidebar">
+        <h2>Main</h2>
+        <div class="sidebar-btns-container">
+          <button id="inbox">
+            <i class="fa-solid fa-inbox fa-fw"></i>
+            Inbox
+          </button>
+          <button id="today">
+            <i class="fa-solid fa-calendar-day fa-fw"></i>
+            Today
+          </button>
+          <button id="upcoming">
+            <i class="fa-solid fa-calendar-week fa-fw"></i>
+            Upcoming
+          </button>
+          <button id="completed">
+            <i class="fa-solid fa-calendar-check fa-fw"></i>
+            Completed
+          </button>
+          <button id="important">
+            <i class="fa-solid fa-star fa-fw"></i>
+            Important
+          </button>
+        </div>
+
+        <h2>Projects</h2>
+        <div class="new-project-btn-container">
+          <button>
+            <i class="fa-regular fa-plus"></i>
+            Create New Project
+          </button>
+        </div>
+        <div class="sidebar-projects-container">
+          <div class="project-item">
+            <p>Project Name</p>
+            <button><i class="fa-solid fa-ellipsis-vertical"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <h2>Today</h2>
+      </div>
+    </main>
+    <footer class="footer">
+      <p>
+        © Made by
+        <a href="https://github.com/Praesidi" target="”_blank”">Praesidi</a> for
+        <a href="https://www.theodinproject.com/" target="”_blank”"
+          >The Odin Project</a
+        >
+      </p>
+    </footer>
   </body>
 </html>
