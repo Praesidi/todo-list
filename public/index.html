@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-      <div class="container">
+      <div class="main-container">
         <h2>Today</h2>
       </div>
     </main>
@@ -80,5 +80,39 @@
         >
       </p>
     </footer>
+    <dialog id="new-task-modal" open>
+      <div class="modal-close-btn" id="modal-close-btn">
+        <button>
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <h2>Create New Task</h2>
+      <form action="" id="create-task-form">
+        <label for="task-title"> Title </label>
+        <input type="text" id="task-title" required />
+
+        <label for="task-description"> Description </label>
+        <textarea
+          name="description"
+          id="task-description"
+          cols="20"
+          rows="3"
+        ></textarea>
+
+        <label for="task-priority"> Priority </label>
+        <select id="task-priority" name="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <label for="task-date"> Due Date </label>
+        <input type="date" id="task-date" required />
+
+        <div class="form-submit-btn">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>
