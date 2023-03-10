@@ -122,7 +122,8 @@ h1, h2, h3
       color:#059669
 
 /* Sidebar -> Projects */ 
-.new-project-btn-container
+.new-project-btn-container,
+.new-task-btn-container
   display: flex
   justify-content: center
   width: 100%
@@ -164,7 +165,9 @@ h1, h2, h3
   background: $light-gray
   border-left: $primary-color solid 3px
   border-radius: 5px
+  margin: 10px 0
   padding: 10px 10px 10px 15px
+  cursor: pointer
 
 /* Project Item -> Project Info */
 .project-info
@@ -220,20 +223,45 @@ h1, h2, h3
 
 /* Main -> Container*/  
 .main-container
+  box-sizing: border-box
   grid-column: 4 / 13
+  height: calc((100vh - $header-height) - $footer-height)
   padding: 15px
+  margin: 0
 
   h2
     margin: 10px 0 30px
     text-align: center
 
-/* Container -> Task Item */
+/* Container -> Add New Task Btn */ 
+/* Styled above with add new project btn */
+.new-task-btn-container
+  margin-bottom: 15px
+
+  & > button
+    &:hover  
+      scale: 1.01
+      
+    &:active
+      scale: 1
+      transition: .1s
+
+/* Container -> Task Container */
+.task-container
+  box-sizing: border-box
+  padding: 5px 10px 5px 5px
+  width: 100%
+  height: calc((100vh - $header-height) - $footer-height - 150px)
+  overflow-y: scroll
+
+/* Task Container -> Task Item */
 .task-item
   box-sizing: border-box
   display: flex
   justify-content: space-between
   align-items: center
   padding: 10px 20px
+  margin: 10px 0
   width: 100%
   height: 40px
   background: $extra-light-gray
