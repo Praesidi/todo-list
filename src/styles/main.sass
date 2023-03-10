@@ -89,6 +89,7 @@ h1, h2, h3
     width: 100%
     letter-spacing: 1px
     transition: .3s
+    cursor: pointer
 
     &:focus 
       outline: none
@@ -134,6 +135,7 @@ h1, h2, h3
     border: $gray dashed 2px
     border-radius: 5px
     transition: .2s
+    cursor: pointer
 
     &:focus 
       outline: none
@@ -179,6 +181,7 @@ h1, h2, h3
   margin-left: 5px
 
   & > button
+    cursor: pointer
     background: transparent
     border: none
 
@@ -209,6 +212,7 @@ h1, h2, h3
     border: none
     border-radius: 5px
     padding: 5px
+    cursor: pointer
 
     &:hover
       background: $extra-light-gray
@@ -241,15 +245,33 @@ h1, h2, h3
   display: flex
   align-items: center 
   
-  input
+  input[type='checkbox']
+    display: block
     margin-right: 15px 
+    width:15px
+    height: 15px
+    border-radius: 50%
+    border: $primary-color solid 1px
+    outline: none
+    vertical-align: middle
+    appearance: none
+    -webkit-appearance: none
+    -moz-appearance: none
+    cursor: pointer
+
+    &:checked 
+      appearance: auto
+      clip-path: circle(50% at 50% 50%)
+      background-color: $primary-color
 
   p
     margin: 0
     letter-spacing: 1px
 
 /* Task Item -> Task Item Btns */
-.task-item-btns  
+.task-item-btns
+  cursor: default
+
   button
     background: transparent
     border: none
@@ -257,6 +279,7 @@ h1, h2, h3
     padding: 5px
     transition: .2s
     color: #9ca3af
+    cursor: pointer
 
     i
       pointer-events: none
