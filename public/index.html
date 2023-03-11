@@ -56,8 +56,8 @@
 
         <h2>Projects</h2>
         <!-- Add New Project Button -->
-        <div class="new-project-btn-container">
-          <button id="new-project-btn">
+        <div class="add-project-btn-container">
+          <button id="add-project-btn">
             <i class="fa-regular fa-plus"></i>
             Create New Project
           </button>
@@ -86,19 +86,22 @@
       <div class="main-container">
         <h2 id="current-page-title">Today</h2>
         <!-- Add New Task Button -->
-        <div class="new-task-btn-container">
+        <div class="add-task-btn-container">
           <button id="add-task-btn">
             <i class="fa-regular fa-plus"></i>
             Create New Task
           </button>
         </div>
         <!-- Tasks' Container -->
-        <div class="task-container">
+        <div class="task-container" id="task-container">
           <!-- Task Item -->
           <div class="task-item">
             <div class="task-item-check">
               <input type="checkbox" />
               <p>Task</p>
+            </div>
+            <div class="task-date-container">
+              <span id="task-date-el">12 may 2023</span>
             </div>
             <div class="task-item-btns">
               <button title="Edit" id="edit-task">
