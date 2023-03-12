@@ -65,6 +65,7 @@ h1, h2, h3
   background: $extra-light-gray
   height: calc((100vh - $header-height) - $footer-height)
   padding: 15px 15px 30px
+  overflow-y: scroll
 
   h2
     display: block
@@ -122,8 +123,8 @@ h1, h2, h3
       color:#059669
 
 /* Sidebar -> Projects */ 
-.new-project-btn-container,
-.new-task-btn-container
+.add-project-btn-container,
+.add-task-btn-container
   display: flex
   justify-content: center
   width: 100%
@@ -151,8 +152,7 @@ h1, h2, h3
       scale: 1
       transition: .1s
 
-.sidebar-projects-container
-  overflow-y: scroll
+.project-container
   margin-top: 15px 
 
 /* Projects -> Project Item 
@@ -163,11 +163,14 @@ h1, h2, h3
   align-items: center
   width: 100%
   background: $light-gray
-  border-left: $primary-color solid 3px
-  border-radius: 5px
+  border-radius: 10px
   margin: 10px 0
   padding: 10px 10px 10px 15px
   cursor: pointer
+  letter-spacing: 1px
+
+.active-project
+  scale: 1.02
 
 /* Project Item -> Project Info */
 .project-info
@@ -181,7 +184,7 @@ h1, h2, h3
 
 /* Project Item -> PopUp Menu */
 .project-menu
-  margin-left: 5px
+  margin-left: auto
 
   & > button
     cursor: pointer
@@ -221,21 +224,34 @@ h1, h2, h3
       background: $extra-light-gray
       color: $primary-color
 
+/* Style Sidebar Category/Project Cards if selected */
+.selected-category,
+.selected-project
+  font-weight: 600
+  scale: 1.05
+
+.selected-category
+  background: $light-gray
+
+.selected-project
+  border-left: $primary-color solid 5px
+
 /* Main -> Container*/  
 .main-container
   box-sizing: border-box
   grid-column: 4 / 13
   height: calc((100vh - $header-height) - $footer-height)
+  overflow-y: scroll
   padding: 15px
   margin: 0
 
   h2
-    margin: 10px 0 30px
+    margin: 10px 0 20px
     text-align: center
 
 /* Container -> Add New Task Btn */ 
 /* Styled above with add new project btn */
-.new-task-btn-container
+.add-task-btn-container
   margin-bottom: 15px
 
   & > button
@@ -251,8 +267,8 @@ h1, h2, h3
   box-sizing: border-box
   padding: 5px 10px 5px 5px
   width: 100%
-  height: calc((100vh - $header-height) - $footer-height - 150px)
-  overflow-y: scroll
+  // height: calc((100vh - $header-height) - $footer-height - 150px)
+  // overflow-y: scroll
 
 /* Task Container -> Task Item */
 .task-item
@@ -261,12 +277,21 @@ h1, h2, h3
   justify-content: space-between
   align-items: center
   padding: 10px 20px
-  margin: 10px 0
+  margin: 15px 0
   width: 100%
   height: 40px
   background: $extra-light-gray
   border-radius: 5px
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px
+
+.task-low-priority
+  border-left: rgb(40, 205, 65) solid 3px
+
+.task-medium-priority
+  border-left: rgb(255, 204, 0) solid 3px
+
+.task-high-priority
+  border-left: rgb(255, 59, 48) solid 3px
 
 /* Task Item -> Title & Checkbox */
 .task-item-check
@@ -296,6 +321,15 @@ h1, h2, h3
     margin: 0
     letter-spacing: 1px
 
+.task-date-container
+  font-family: 'Sono', sans-serif
+  font-size: 12px
+  border: $light-gray solid 2px
+  border-radius: 5px
+  padding: 5px 10px
+  margin-left: auto
+  margin-right: 20px
+
 /* Task Item -> Task Item Btns */
 .task-item-btns
   cursor: default
@@ -303,7 +337,7 @@ h1, h2, h3
   button
     background: transparent
     border: none
-    margin: 0 5px
+    // margin: 0 5px
     padding: 5px
     transition: .2s
     color: #9ca3af
@@ -324,6 +358,10 @@ h1, h2, h3
 
   #delete-task
     color: #f87171
+
+/* Styling Star When Marked */
+.important
+  color: #eab308
 
 /* Footer */    
 .footer 
@@ -352,27 +390,32 @@ h1, h2, h3
       color: $primary-color
 
 /* Modal */  
-#new-task-modal
-  // display: flex
-  flex-direction: column
-  align-items: center
+#task-modal,
+#project-modal
   position: absolute
   top: 50%
   transform: translate(-50%, -50%)
   left: 50%
   margin: 0
   padding: 15px 15px 30px
-
   width: 320px
   border: none
   border-radius: 15px
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
 
+.task-modal-content,
+.project-modal-content
+  display: flex
+  flex-direction: column
+  align-items: center 
+  width: 100%
+  height: 100%
+
   h2
     margin-bottom: 20px
 
 /* Modal -> Close Modal Button*/
-.modal-close-btn
+.close-modal-btn-container
   width: 100%
   display: flex
   justify-content: flex-end
@@ -396,7 +439,9 @@ h1, h2, h3
         scale: 0.9
 
 /* Modal -> New Task Form*/
-#new-task-form
+/* Modal -> New Project Form*/
+#task-form,
+#project-form
   display: flex
   flex-direction: column
   justify-content: space-evenly
@@ -442,5 +487,5 @@ h1, h2, h3
       
     &:active
       scale: 1
-      transition: .1s
-    
+      transition: .1s 
+
