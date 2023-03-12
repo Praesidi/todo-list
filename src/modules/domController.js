@@ -6,14 +6,25 @@ const domController = (() => {
 
   const createTask = (task) => {
     const taskItem = String.raw`
-      <div class="task-item" data-id="${task.id}">
+      <div class="task-item 
+        ${
+          task.priority === 'low'
+            ? 'task-low-priority'
+            : task.priority === 'medium'
+            ? 'task-medium-priority'
+            : 'task-high-priority'
+        }" 
+        data-id="${task.id}"
+      >
         <div class="task-item-check">
           <input type="checkbox" ${task.isDone ? ' checked' : ''}/>
           <p>${task.title}</p>
         </div>
         <div class="task-date-container">
           <span id="task-date-el">${
-            task.date === '' ? 'Date Not Selected' : task.date
+            task.dueDate === ''
+              ? 'Due Date: Not Selected'
+              : `Due Date: ${task.dueDate}`
           }</span>
             </div>
         <div class="task-item-btns">
