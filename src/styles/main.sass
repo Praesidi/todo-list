@@ -155,6 +155,9 @@ h1, h2, h3
 .project-container
   margin-top: 15px 
 
+  i
+    pointer-events: none
+
 /* Projects -> Project Item 
 .project-item
   box-sizing: border-box
@@ -223,6 +226,12 @@ h1, h2, h3
     &:hover
       background: $extra-light-gray
       color: $primary-color
+
+    & > *
+      pointer-events: none
+
+.popup-active
+  display: flex
 
 /* Style Sidebar Category/Project Cards if selected */
 .selected-category,
