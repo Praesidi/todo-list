@@ -81,38 +81,23 @@ const handlersController = (() => {
     closeProjectModal();
   };
 
-  const showProjectMenu = () => {
-    console.log(projectPopupMenu.classList.contains('popup-active'));
-    if (projectPopupMenu.classList.contains('popup-active')) {
-      projectPopupMenu.classList.remove('popup-active');
-    } else {
-      projectPopupMenu.classList.add('popup-active');
-    }
-  };
-
   // add event listeners to created projects with bubbling
   const projectContainer = document.getElementById('project-container');
 
-  const showPopupMenu = (e) => {
-    console.log(e.target);
-    const projectPopupMenu = document.getElementById('project-menu');
-    const projectPopupMenuBtn = document.getElementById('project-menu-btn');
-    // if (
-    //   e.target.id === 'project-menu-btn' &&
-    //   e.target.nextSibling.classList.contains('popup-active')
-    // ) {
-    //   e.target.nextSibling.classList.remove('popup-active');
-    // } else {
-    //   e.target.nextSibling.classList.add('popup-active');
-    // }
-    if (projectPopupMenu.classList.contains('popup-active')) {
-      projectPopupMenu.classList.remove('popup-active');
+  const showProjectMenu = (e) => {
+    const target = e.target;
+
+    if (
+      target.id === 'project-menu-btn' &&
+      target.nextElementSibling.classList.contains('popup-active')
+    ) {
+      target.nextElementSibling.classList.remove('popup-active');
     } else {
-      projectPopupMenu.classList.add('popup-active');
+      target.nextElementSibling.classList.add('popup-active');
     }
   };
 
-  projectContainer.addEventListener('click', showPopupMenu);
+  projectContainer.addEventListener('click', showProjectMenu);
 
   addTaskBtn.addEventListener('click', openTaskModal);
   addProjectBtn.addEventListener('click', openProjectModal);
@@ -122,8 +107,6 @@ const handlersController = (() => {
 
   taskForm.addEventListener('submit', handleTaskForm);
   projectForm.addEventListener('submit', handleProjectForm);
-
-  projectPopupMenuBtn.addEventListener('click', showProjectMenu);
 })();
 
 export default handlersController;
