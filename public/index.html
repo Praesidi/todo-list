@@ -74,9 +74,9 @@
               <button id="project-menu-btn">
                 <i class="fa-solid fa-ellipsis-vertical"></i>
               </button>
-              <div class="project-popup-menu">
-                <button>Edit</button>
-                <button>Delete</button>
+              <div class="project-popup-menu" id="project-menu">
+                <button id="projectEditBtn">Edit</button>
+                <button id="projectDeleteBtn">Delete</button>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@
         <!-- Tasks' Container -->
         <div class="task-container" id="task-container">
           <!-- Task Item -->
-          <div class="task-item">
+          <!-- <div class="task-item">
             <div class="task-item-check">
               <input type="checkbox" />
               <p>Task</p>
@@ -112,13 +112,12 @@
               </button>
               <button title="Mark as important" id="mark-important-task">
                 <i class="fa-regular fa-star fa-fw"></i>
-                <!-- <i class="fa-solid fa-star"></i> -->
               </button>
               <button title="Delete" id="delete-task">
                 <i class="fa-solid fa-trash-can fa-fw"></i>
               </button>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </main>
@@ -174,7 +173,7 @@
         <h2>Create New Project</h2>
         <form action="" id="project-form">
           <label for="project-title"> Title </label>
-          <input type="text" id="project-title" />
+          <input type="text" id="project-title" required />
           <div class="project-form-btns-container">
             <button type="submit" id="project-form-submit-btn">Save</button>
           </div>
