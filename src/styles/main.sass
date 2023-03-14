@@ -303,7 +303,7 @@ h1, h2, h3
   border-left: rgb(255, 59, 48) solid 3px
 
 /* Task Item -> Title & Checkbox */
-.task-item-check
+.task-item-checkbox
   display: flex
   align-items: center 
   
@@ -432,20 +432,21 @@ h1, h2, h3
   button
     background: transparent
     border: none
-    transition: transform 0.2s ease-in-out
+    padding: 5px 10px
+    transform-origin: center
+    transition: .2s
     font-size: 1.3rem
     color: $red
 
     &:hover
-      scale: 1.1
-      transform: rotate(90deg)
-      filter: brightness(1.2)
+      scale: 1.2
+      filter: brightness(1.1)
 
       &:focus
         outline: none
 
       &:active 
-        scale: 0.9
+        scale: 1
 
 /* Modal -> New Task Form*/
 /* Modal -> New Project Form*/
