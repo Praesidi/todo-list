@@ -158,7 +158,7 @@
           <label for="task-date"> Due Date </label>
           <input type="date" id="task-date" />
           <div class="form-submit-btn">
-            <button type="submit">Submit</button>
+            <button type="submit">Save</button>
           </div>
         </form>
       </div>
@@ -178,6 +178,32 @@
             <button type="submit" id="project-form-submit-btn">Save</button>
           </div>
         </form>
+      </div>
+    </dialog>
+    <dialog id="task-info-modal" open>
+      <div class="info-modal-content">
+        <div class="close-modal-btn-container">
+          <button id="close-project-modal-btn">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <h2>Task Info</h2>
+        <div class="info-modal-line">
+          <p>Title:</p>
+          <p id="info-modal-title"></p>
+        </div>
+        <div class="info-modal-line">
+          <p>Description:</p>
+          <p id="info-modal-description"></p>
+        </div>
+        <div class="info-modal-line">
+          <p>Priority:</p>
+          <p id="info-modal-priority"></p>
+        </div>
+        <div class="info-modal-line">
+          <p>Due Date:</p>
+          <p id="info-modal-date"></p>
+        </div>
       </div>
     </dialog>
   </body>

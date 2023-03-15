@@ -400,7 +400,8 @@ h1, h2, h3
 
 /* Modal */  
 #task-modal,
-#project-modal
+#project-modal,
+#task-info-modal
   position: absolute
   top: 50%
   transform: translate(-50%, -50%)
@@ -410,10 +411,17 @@ h1, h2, h3
   width: 320px
   border: none
   border-radius: 15px
+  background: $white
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
 
+  &::backdrop
+    background-color: black
+    // backdrop-filter: blur(10px)
+    animation: none
+
 .task-modal-content,
-.project-modal-content
+.project-modal-content,
+.info-modal-content
   display: flex
   flex-direction: column
   align-items: center 
@@ -498,4 +506,16 @@ h1, h2, h3
     &:active
       scale: 1
       transition: .1s 
+
+.info-modal-line 
+  box-sizing: border-box
+  display: flex
+  justify-content: flex-start
+  width: 100%
+  padding: 0 15px
+  
+  p:first-of-type
+    font-weight: 500
+    margin-right: 10px
+
 
