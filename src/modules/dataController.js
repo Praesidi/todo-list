@@ -23,16 +23,33 @@ const dataController = (() => {
     project.title = newTitle;
   };
 
-  const deleteProject = (project) => {};
+  const deleteProject = (projectID) => {
+    const projectIndex = projectCollection.findIndex(
+      (project) => project.id === Number(projectID)
+    );
+    projectCollection.splice(projectIndex, 1);
+  };
 
   const getProjectCollection = () => {
     return projectCollection;
+  };
+
+  let currentProject = 1;
+  // TODO: write a function to set default value for current project onload
+
+  const setCurrentProject = (projectID) => {
+    currentProject = projectID;
+  };
+
+  const getCurrentProject = () => {
+    return currentProject;
   };
 
   const createNewTask = (title, project, description, priority, dueDate) => {
     const id = nanoid(10);
     let isImportant = false;
     let isDone = false;
+    project = currentProject;
 
     const task = {
       title,
@@ -54,17 +71,61 @@ const dataController = (() => {
     return taskCollection;
   };
 
-  const editTask = () => {};
+  const getTaskObject = (taskID) => {
+    let taskObj = {};
+    taskCollection.forEach((task) => {
+      if (task.id === taskID) {
+        taskObj = task;
+      }
+    });
+    return taskObj;
+  };
 
-  const deleteTask = () => {};
+  const editTask = (taskObj, ...rest) => {
+    const [title, description, priority, dueDate] = rest;
+
+    taskObj.title = title;
+    taskObj.description = description;
+    taskObj.priority = priority;
+    taskObj.dueDate = dueDate;
+  };
+
+  const markTaskImportant = (taskObj, ...rest) => {
+    const [status] = rest;
+    if (status) {
+      taskObj.isImportant = true;
+    } else {
+      taskObj.isImportant = false;
+    }
+  };
+
+  const markTaskDone = (taskObj, ...rest) => {
+    const [status] = rest;
+    if (status) {
+      taskObj.isDone = true;
+    } else {
+      taskObj.isDone = false;
+    }
+  };
+
+  const deleteTask = (taskID) => {
+    const taskIndex = taskCollection.findIndex((task) => task.id === taskID);
+    taskCollection.splice(taskIndex, 1);
+  };
 
   return {
     getProjectCollection,
     getTaskCollection,
+    getCurrentProject,
+    setCurrentProject,
+    markTaskImportant,
     createNewProject,
     deleteProject,
+    getTaskObject,
     createNewTask,
+    markTaskDone,
     deleteTask,
+    editTask,
   };
 })();
 
