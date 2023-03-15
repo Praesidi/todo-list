@@ -63,12 +63,35 @@ const handlersController = (() => {
     projectModal.show();
   };
 
-  const openInfoModal = () => {
+  const infoModalTitle = document.getElementById('info-modal-title');
+  const infoModalDescription = document.getElementById(
+    'info-modal-description'
+  );
+  const infoModalPriority = document.getElementById('info-modal-priority');
+  const infoModalDate = document.getElementById('info-modal-date');
+  const infoModalProject = document.getElementById('info-modal-project');
+
+  const openInfoModal = (obj) => {
     if (taskModal.open || projectModal.open) {
       closeProjectModal();
       closeTaskModal();
     }
-    infoModal.open();
+
+    infoModalTitle.textContent = obj.title;
+    infoModalPriority.textContent = obj.priority;
+    infoModalProject.textContent = obj.project;
+
+    obj.description === ''
+      ? (infoModalDescription.textContent = 'Not Set')
+      : (infoModalDescription.textContent = obj.description);
+
+    obj.dueDate === ''
+      ? (infoModalDate.textContent = 'Not Set')
+      : (infoModalDate.textContent = obj.dueDate);
+
+    console.log(obj.dueDate);
+
+    infoModal.show();
   };
 
   // task form inputs
@@ -164,7 +187,7 @@ const handlersController = (() => {
     }
 
     if (target.id === 'show-task-info') {
-      openInfoModal.open();
+      openInfoModal(taskObj);
     }
 
     if (target.id === 'mark-important-btn') {
