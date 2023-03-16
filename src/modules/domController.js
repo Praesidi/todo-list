@@ -81,8 +81,8 @@ const domController = (() => {
             <i class="fa-solid fa-ellipsis-vertical"></i>
           </button>
           <div class="project-popup-menu" id="project-menu">
-            <button id="projectEditBtn">Edit</button>
-            <button id="projectDeleteBtn">Delete</button>
+            <button id="project-edit-btn">Edit</button>
+            <button id="project-delete-btn">Delete</button>
           </div>
         </div>
       </div>
@@ -91,7 +91,9 @@ const domController = (() => {
     return projectItem;
   };
 
-  const deleteProject = () => {};
+  const deleteProject = (project) => {
+    project.remove();
+  };
 
   const populateTaskContainer = (taskCollection) => {
     taskContainer.textContent = '';
