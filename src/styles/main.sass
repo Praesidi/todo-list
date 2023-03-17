@@ -415,7 +415,13 @@ h1, h2, h3
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
 
   &::backdrop
-    background-color: black
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(50, 50, 50, 0.5)
+    backdrop-filter: blur(5px)
     // backdrop-filter: blur(10px)
     animation: none
 
@@ -445,6 +451,7 @@ h1, h2, h3
     transition: .2s
     font-size: 1.3rem
     color: $red
+    cursor: pointer
 
     &:hover
       scale: 1.2
@@ -496,6 +503,7 @@ h1, h2, h3
     font-weight: 500
     letter-spacing: 1px
     transition: .2s
+    cursor: pointer
 
     &:focus 
       outline: none
