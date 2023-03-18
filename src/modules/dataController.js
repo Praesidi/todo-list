@@ -18,9 +18,9 @@ const dataController = (() => {
     return project;
   };
 
-  // test later
-  const changeProjectTitle = (project, newTitle) => {
-    project.title = newTitle;
+  const editProject = (projectObj, ...rest) => {
+    const [title] = rest;
+    projectObj.title = title;
   };
 
   const deleteProject = (projectID) => {
@@ -32,6 +32,16 @@ const dataController = (() => {
 
   const getProjectCollection = () => {
     return projectCollection;
+  };
+
+  const getProjectObject = (projectID) => {
+    let projectObj = {};
+    projectCollection.forEach((project) => {
+      if (project.id === projectID) {
+        projectObj = project;
+      }
+    });
+    return projectObj;
   };
 
   let currentProject = 1;
@@ -49,7 +59,7 @@ const dataController = (() => {
     const id = nanoid(10);
     let isImportant = false;
     let isDone = false;
-    project = currentProject;
+    project = currentProject; //projects id
 
     const task = {
       title,
@@ -61,7 +71,6 @@ const dataController = (() => {
       isImportant,
       isDone,
     };
-
     taskCollection.push(task);
 
     return task;
@@ -102,9 +111,9 @@ const dataController = (() => {
   const markTaskDone = (taskObj, ...rest) => {
     const [status] = rest;
     if (status) {
-      taskObj.isDone = true;
-    } else {
       taskObj.isDone = false;
+    } else {
+      taskObj.isDone = true;
     }
   };
 
@@ -120,10 +129,12 @@ const dataController = (() => {
     setCurrentProject,
     markTaskImportant,
     createNewProject,
+    getProjectObject,
     deleteProject,
     getTaskObject,
     createNewTask,
     markTaskDone,
+    editProject,
     deleteTask,
     editTask,
   };

@@ -23,19 +23,61 @@ const handlersController = (() => {
   const projectForm = document.getElementById('project-form');
   // task modal mode
   let taskModalMode = 'create';
-
-  const closeTaskModal = () => {
-    taskForm.reset();
-    taskModal.close();
-  };
+  let projectModalMode = 'create';
 
   const closeProjectModal = () => {
     projectForm.reset();
     projectModal.close();
   };
 
-  const closeInfoModal = () => {
-    infoModal.close();
+  const projectModalTitle = document.getElementById('project-modal-title');
+
+  const openProjectModal = () => {
+    projectModalTitle.textContent = 'Create New Project';
+    projectModalMode = 'create';
+
+    if (taskModal.open || infoModal.open) {
+      closeTaskModal();
+      closeInfoModal();
+    }
+    hideProjectsMenu();
+    projectModal.showModal();
+  };
+
+  const hideProjectsMenu = () => {
+    const allProjectsMenu = Array.from(
+      document.getElementsByClassName('popup-active')
+    );
+
+    allProjectsMenu.forEach((menu) => {
+      menu.classList.remove('popup-active');
+    });
+  };
+
+  const showProjectMenu = (e) => {
+    const target = e.target;
+    const numActiveMenus =
+      document.getElementsByClassName('popup-active').length; // num of active menus
+    // const numActiveMenus = document.querySelectorAll('.popup-active').length;
+
+    if (target.id !== 'project-menu-btn') {
+      return false;
+    }
+
+    if (target.nextElementSibling.classList.contains('popup-active')) {
+      target.nextElementSibling.classList.remove('popup-active');
+    } else {
+      target.nextElementSibling.classList.add('popup-active');
+    }
+
+    if (numActiveMenus === 1) {
+      hideProjectsMenu();
+    }
+  };
+
+  const closeTaskModal = () => {
+    taskForm.reset();
+    taskModal.close();
   };
 
   const resetTaskModal = () => {
@@ -45,24 +87,17 @@ const handlersController = (() => {
   const taskModalTitle = document.getElementById('task-modal-title');
 
   const openTaskModal = () => {
-    // resetTaskModal();
     taskModalTitle.textContent = 'Create New Task';
     taskModalMode = 'create';
     if (projectModal.open || infoModal.open) {
       closeProjectModal();
       closeInfoModal();
     }
-    taskModal.show();
+    hideProjectsMenu();
+    taskModal.showModal();
   };
 
-  const openProjectModal = () => {
-    if (taskModal.open || infoModal.open) {
-      closeTaskModal();
-      closeInfoModal();
-    }
-    projectModal.show();
-  };
-
+  // task info modal strings
   const infoModalTitle = document.getElementById('info-modal-title');
   const infoModalDescription = document.getElementById(
     'info-modal-description'
@@ -70,6 +105,10 @@ const handlersController = (() => {
   const infoModalPriority = document.getElementById('info-modal-priority');
   const infoModalDate = document.getElementById('info-modal-date');
   const infoModalProject = document.getElementById('info-modal-project');
+
+  const closeInfoModal = () => {
+    infoModal.close();
+  };
 
   const openInfoModal = (obj) => {
     if (taskModal.open || projectModal.open) {
@@ -89,10 +128,12 @@ const handlersController = (() => {
       ? (infoModalDate.textContent = 'Not Set')
       : (infoModalDate.textContent = obj.dueDate);
 
-    console.log(obj.dueDate);
-
-    infoModal.show();
+    hideProjectsMenu();
+    infoModal.showModal();
   };
+
+  let taskToEdit = {};
+  let projectToEdit = {};
 
   // task form inputs
   const taskTitle = document.getElementById('task-title');
@@ -103,6 +144,7 @@ const handlersController = (() => {
   const handleTaskForm = (e) => {
     e.preventDefault();
     const currentProject = dataController.getCurrentProject();
+    const taskCollection = dataController.getTaskCollection();
 
     if (taskModalMode === 'create') {
       const task = dataController.createNewTask(
@@ -112,26 +154,22 @@ const handlersController = (() => {
         taskPriority.value,
         taskDate.value
       );
-
-      const taskCollection = dataController.getTaskCollection();
-
-      domController.populateTaskContainer(taskCollection);
       resetTaskModal();
     }
 
     if (taskModalMode === 'edit') {
       dataController.editTask(
-        taskObj, // FIXME:
+        taskToEdit,
         taskTitle.value,
         taskDescription.value,
         taskPriority.value,
         taskDate.value
       );
-      domController.populateTaskContainer(dataController.getTaskCollection());
       closeTaskModal();
+      console.log('task to edit', taskToEdit);
     }
-
-    console.log(dataController.getTaskCollection());
+    domController.populateTaskContainer(taskCollection);
+    taskToEdit = {};
   };
 
   // project form inputs
@@ -139,25 +177,20 @@ const handlersController = (() => {
 
   const handleProjectForm = (e) => {
     e.preventDefault();
-
-    const project = dataController.createNewProject(projectTitle.value);
     const projectCollection = dataController.getProjectCollection();
+    // dataController.setCurrentProject();
+
+    if (projectModalMode === 'create') {
+      const project = dataController.createNewProject(projectTitle.value);
+    }
+
+    if (projectModalMode === 'edit') {
+      dataController.editProject(projectToEdit, projectTitle.value);
+    }
 
     domController.populateProjectContainer(projectCollection);
+    projectToEdit = {};
     closeProjectModal();
-  };
-
-  const showProjectMenu = (e) => {
-    const target = e.target;
-
-    if (
-      target.id === 'project-menu-btn' &&
-      target.nextElementSibling.classList.contains('popup-active')
-    ) {
-      target.nextElementSibling.classList.remove('popup-active');
-    } else {
-      target.nextElementSibling.classList.add('popup-active');
-    }
   };
 
   const handleTaskCardBtns = (e) => {
@@ -184,6 +217,8 @@ const handlersController = (() => {
       taskDescription.value = taskObj.description;
       taskPriority.value = taskObj.priority;
       taskDate.value = taskObj.dueDate;
+
+      taskToEdit = taskObj;
     }
 
     if (target.id === 'show-task-info') {
@@ -206,8 +241,33 @@ const handlersController = (() => {
     }
   };
 
+  // TODO: close modal/project options when user click outside of the element
+
+  const handleProjectCardBtns = (e) => {
+    const target = e.target;
+    const projectCard = target.parentNode.parentNode.parentNode;
+    const projectID = projectCard.getAttribute('data-id');
+    const projectObj = dataController.getProjectObject(projectID);
+
+    if (target.id === 'project-edit-btn') {
+      openProjectModal();
+      projectModalTitle.textContent = 'Edit Project';
+      projectModalMode = 'edit';
+
+      // fills modal inputs with object properties
+      projectTitle.value = projectObj.title;
+      projectToEdit = projectObj;
+    }
+
+    if (target.id === 'project-delete-btn') {
+      dataController.deleteProject(projectID);
+      domController.deleteProject(projectCard);
+    }
+  };
+
   taskContainer.addEventListener('click', handleTaskCardBtns);
 
+  projectContainer.addEventListener('click', handleProjectCardBtns);
   projectContainer.addEventListener('click', showProjectMenu);
 
   addTaskBtn.addEventListener('click', openTaskModal);
