@@ -51,7 +51,6 @@ const domController = (() => {
     `;
 
     // if task marked as important then use <i class="fa-solid fa-star"></i>
-
     return taskItem;
   };
 
@@ -97,6 +96,7 @@ const domController = (() => {
 
   const populateTaskContainer = (taskCollection) => {
     taskContainer.textContent = '';
+
     taskCollection.forEach((task) => {
       taskContainer.innerHTML += createTask(task);
     });
@@ -107,17 +107,6 @@ const domController = (() => {
     projectCollection.forEach((project) => {
       projectContainer.innerHTML += createProject(project);
     });
-  };
-
-  const setCurrentFolder = (e) => {
-    const selectedFolder = e.target;
-    const folderID = selectedFolder.getAttribute('id');
-
-    // const unselectAllFolder = () => {};
-
-    // if (folderID === 'inbox') {
-    //   selectedFolder;
-    // }
   };
 
   return {
