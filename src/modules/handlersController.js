@@ -58,19 +58,18 @@ const handlersController = (() => {
     const target = e.target;
     const numActiveMenus =
       document.getElementsByClassName('popup-active').length; // num of active menus
-    // const numActiveMenus = document.querySelectorAll('.popup-active').length;
 
     if (target.id !== 'project-menu-btn') {
       return false;
     }
 
-    if (target.nextElementSibling.classList.contains('popup-active')) {
-      target.nextElementSibling.classList.remove('popup-active');
-    } else {
+    if (
+      !target.nextElementSibling.classList.contains('popup-active') &&
+      numActiveMenus <= 1
+    ) {
+      hideProjectsMenu();
       target.nextElementSibling.classList.add('popup-active');
-    }
-
-    if (numActiveMenus === 1) {
+    } else {
       hideProjectsMenu();
     }
   };
@@ -264,6 +263,12 @@ const handlersController = (() => {
       domController.deleteProject(projectCard);
     }
   };
+
+  window.addEventListener('click', (e) => {
+    if (e.target.id !== 'project-menu-btn') {
+      hideProjectsMenu();
+    }
+  });
 
   taskContainer.addEventListener('click', handleTaskCardBtns);
 
