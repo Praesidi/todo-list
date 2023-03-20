@@ -44,9 +44,8 @@ const dataController = (() => {
     return projectObj;
   };
 
-  let currentProject = 1;
   // TODO: write a function to set default value for current project onload
-
+  let currentProject;
   const setCurrentProject = (projectID) => {
     currentProject = projectID;
   };
@@ -122,8 +121,82 @@ const dataController = (() => {
     taskCollection.splice(taskIndex, 1);
   };
 
+  const sortTaskCollection = (categoryID) => {
+    if (categoryID === 'inbox') {
+      return taskCollection;
+    }
+
+    if (categoryID === 'today') {
+      const todaysDate = new Date().toLocaleDateString();
+      const sortedTaskCollection = [];
+      console.log(typeof todaysDate);
+
+      taskCollection.forEach((task) => {
+        console.log(typeof task.dueDate);
+        if (
+          task.dueDate !== '' &&
+          task.dueDate.toDateString() === todaysDate.toDateString()
+        ) {
+          console.log(task.dueDate.toDateString());
+          sortedTaskCollection.push(task);
+        }
+      });
+      return sortedTaskCollection;
+    }
+
+    if (categoryID === 'upcoming') {
+      const sortedTaskCollection = [];
+
+      taskCollection.forEach((task) => {
+        if (
+          task.dueDate !== '' &&
+          task.dueDate.toDateString() !== todaysDate.toDateString()
+        ) {
+          sortedTaskCollection.push(task);
+        }
+      });
+
+      return sortedTaskCollection;
+    }
+
+    if (categoryID === 'completed') {
+      const sortedTaskCollection = [];
+
+      taskCollection.forEach((task) => {
+        if (task.isDone) {
+          sortedTaskCollection.push(task);
+        }
+      });
+
+      return sortedTaskCollection;
+    }
+
+    if (categoryID === 'important') {
+      const sortedTaskCollection = [];
+
+      taskCollection.forEach((task) => {
+        if (task.isImportant) {
+          sortedTaskCollection.push(task);
+        }
+      });
+
+      return sortedTaskCollection;
+    } else {
+      const sortedTaskCollection = [];
+
+      taskCollection.forEach((task) => {
+        if (task.id === categoryID) {
+          sortedTaskCollection.push(task);
+        }
+      });
+
+      return sortTaskCollection;
+    }
+  };
+
   return {
     getProjectCollection,
+    sortTaskCollection,
     getTaskCollection,
     getCurrentProject,
     setCurrentProject,
