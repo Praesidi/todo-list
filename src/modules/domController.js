@@ -60,6 +60,7 @@ const domController = (() => {
 
   const markTaskImportant = (taskBtn, ...rest) => {
     const [status] = rest;
+    console.log(taskBtn);
     if (status) {
       taskBtn.classList.remove('fa-regular');
       taskBtn.classList.add('important', 'fa-solid');
@@ -109,11 +110,24 @@ const domController = (() => {
     });
   };
 
+  const createAddTaskBtn = (element) => {
+    const addBtn = String.raw`
+      <button id="add-task-btn">
+        <i class="fa-regular fa-plus"></i>
+        Create New Task
+      </button>
+    `;
+
+    element.textContent = '';
+    element.innerHTML = addBtn;
+  };
+
   return {
     deleteTask,
     createTask,
     createProject,
     deleteProject,
+    createAddTaskBtn,
     markTaskImportant,
     populateTaskContainer,
     populateProjectContainer,
