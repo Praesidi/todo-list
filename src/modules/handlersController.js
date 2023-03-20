@@ -3,25 +3,24 @@ import dataController from './dataController.js';
 import domController from './domController.js';
 
 const handlersController = (() => {
-  // add btns
+  // task modal
+  const taskContainer = document.getElementById('task-container');
   const addTaskBtn = document.getElementById('add-task-btn');
-  const addProjectBtn = document.getElementById('add-project-btn');
-  // close modal btn
   const closeTaskModalBtn = document.getElementById('close-task-modal-btn');
+  const taskModal = document.getElementById('task-modal');
+  const taskForm = document.getElementById('task-form');
+  // project modal
+  const projectContainer = document.getElementById('project-container');
+  const addProjectBtn = document.getElementById('add-project-btn');
   const closeProjectModalBtn = document.getElementById(
     'close-project-modal-btn'
   );
-  const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
-  // containers
-  const projectContainer = document.getElementById('project-container');
-  const taskContainer = document.getElementById('task-container');
-  // modals&forms
-  const taskModal = document.getElementById('task-modal');
   const projectModal = document.getElementById('project-modal');
-  const infoModal = document.getElementById('info-modal');
-  const taskForm = document.getElementById('task-form');
   const projectForm = document.getElementById('project-form');
-  // task modal mode
+  // info modal
+  const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
+  const infoModal = document.getElementById('info-modal');
+
   let taskModalMode = 'create';
   let projectModalMode = 'create';
 
@@ -96,6 +95,10 @@ const handlersController = (() => {
     taskModal.showModal();
   };
 
+  const closeInfoModal = () => {
+    infoModal.close();
+  };
+
   // task info modal strings
   const infoModalTitle = document.getElementById('info-modal-title');
   const infoModalDescription = document.getElementById(
@@ -104,10 +107,6 @@ const handlersController = (() => {
   const infoModalPriority = document.getElementById('info-modal-priority');
   const infoModalDate = document.getElementById('info-modal-date');
   const infoModalProject = document.getElementById('info-modal-project');
-
-  const closeInfoModal = () => {
-    infoModal.close();
-  };
 
   const openInfoModal = (obj) => {
     if (taskModal.open || projectModal.open) {
@@ -165,7 +164,6 @@ const handlersController = (() => {
         taskDate.value
       );
       closeTaskModal();
-      console.log('task to edit', taskToEdit);
     }
     domController.populateTaskContainer(taskCollection);
     taskToEdit = {};
@@ -197,8 +195,6 @@ const handlersController = (() => {
     const taskID = target.parentNode.parentNode.getAttribute('data-id');
     const taskCard = target.parentNode.parentNode;
     const taskObj = dataController.getTaskObject(taskID);
-    const taskImportantBtn =
-      document.getElementById('mark-important-btn').firstElementChild;
 
     if (target.id === 'task-checkbox' && target.checked) {
       dataController.markTaskDone(taskObj);
@@ -227,10 +223,10 @@ const handlersController = (() => {
     if (target.id === 'mark-important-btn') {
       if (taskObj.isImportant) {
         dataController.markTaskImportant(taskObj);
-        domController.markTaskImportant(taskImportantBtn);
+        domController.markTaskImportant(target.firstElementChild);
       } else {
         dataController.markTaskImportant(taskObj, 1);
-        domController.markTaskImportant(taskImportantBtn, 1);
+        domController.markTaskImportant(target.firstElementChild, 1);
       }
     }
 
@@ -239,8 +235,6 @@ const handlersController = (() => {
       domController.deleteTask(taskCard);
     }
   };
-
-  // TODO: close modal/project options when user click outside of the element
 
   const handleProjectCardBtns = (e) => {
     const target = e.target;
@@ -264,20 +258,84 @@ const handlersController = (() => {
     }
   };
 
-  window.addEventListener('click', (e) => {
+  const pageTitle = document.getElementById('page-title');
+  const addBtnContainer = document.getElementById('add-task-btn-container');
+  const sidebar = document.getElementById('sidebar');
+
+  // TODO: make created project active
+  // TODO: rerender task container after manipulation
+  // TODO: style finished tasks
+
+  const handleCategorySelectors = (e) => {
+    const target = e.target;
+    const projectID = target.getAttribute('data-id');
+    const projectObj = dataController.getProjectObject(projectID);
+
+    if (projectID !== null) {
+      domController.createAddTaskBtn(addBtnContainer);
+      pageTitle.textContent = projectObj.title;
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection(target.id)
+      );
+    }
+
+    if (target.id === 'inbox') {
+      addBtnContainer.textContent = '';
+      pageTitle.textContent = 'Inbox';
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection('inbox')
+      );
+    }
+
+    if (target.id === 'today') {
+      addBtnContainer.textContent = '';
+      pageTitle.textContent = 'Today';
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection('today')
+      );
+    }
+
+    if (target.id === 'upcoming') {
+      addBtnContainer.textContent = '';
+      pageTitle.textContent = 'Upcoming';
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection('upcoming')
+      );
+    }
+
+    if (target.id === 'completed') {
+      addBtnContainer.textContent = '';
+      pageTitle.textContent = 'Completed';
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection('completed')
+      );
+    }
+
+    if (target.id === 'important') {
+      addBtnContainer.textContent = '';
+      pageTitle.textContent = 'Important';
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection('important')
+      );
+    }
+  };
+
+  document.addEventListener('click', (e) => {
     if (e.target.id !== 'project-menu-btn') {
       hideProjectsMenu();
     }
   });
-
+  sidebar.addEventListener('click', handleCategorySelectors);
   taskContainer.addEventListener('click', handleTaskCardBtns);
-
   projectContainer.addEventListener('click', handleProjectCardBtns);
   projectContainer.addEventListener('click', showProjectMenu);
 
-  addTaskBtn.addEventListener('click', openTaskModal);
+  addBtnContainer.addEventListener('click', (e) => {
+    if (e.target.id === 'add-task-btn') {
+      openTaskModal();
+    }
+  });
   addProjectBtn.addEventListener('click', openProjectModal);
-
   closeTaskModalBtn.addEventListener('click', closeTaskModal);
   closeProjectModalBtn.addEventListener('click', closeProjectModal);
   closeInfoModalBtn.addEventListener('click', closeInfoModal);
