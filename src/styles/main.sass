@@ -12,8 +12,10 @@ $red: #DC2626
 $header-height: 60px
 $footer-height: 30px
   
-body
+*
   box-sizing: border-box
+
+body
   height: 100vh
   display: flex
   flex-direction: column
@@ -60,7 +62,6 @@ h1, h2, h3
 
 /* Main -> Sidebar */  
 .sidebar
-  box-sizing: border-box
   grid-column: 1 / 4
   background: $extra-light-gray
   height: calc((100vh - $header-height) - $footer-height)
@@ -81,7 +82,7 @@ h1, h2, h3
   gap: 5px
   margin: 10px 0
 
-  button
+  div
     display: flex
     justify-content: flex-start
     background: transparent
@@ -160,7 +161,6 @@ h1, h2, h3
 
 /* Projects -> Project Item 
 .project-item
-  box-sizing: border-box
   display: flex
   justify-content: space-between
   align-items: center
@@ -171,6 +171,11 @@ h1, h2, h3
   padding: 10px 10px 10px 15px
   cursor: pointer
   letter-spacing: 1px
+
+  p, 
+  .project-info
+    pointer-events: none
+
 
 .active-project
   scale: 1.02
@@ -247,7 +252,6 @@ h1, h2, h3
 
 /* Main -> Container*/  
 .main-container
-  box-sizing: border-box
   grid-column: 4 / 13
   height: calc((100vh - $header-height) - $footer-height)
   overflow-y: scroll
@@ -273,7 +277,6 @@ h1, h2, h3
 
 /* Container -> Task Container */
 .task-container
-  box-sizing: border-box
   padding: 5px 10px 5px 5px
   width: 100%
   // height: calc((100vh - $header-height) - $footer-height - 150px)
@@ -281,7 +284,6 @@ h1, h2, h3
 
 /* Task Container -> Task Item */
 .task-item
-  box-sizing: border-box
   display: flex
   justify-content: space-between
   align-items: center
@@ -476,13 +478,13 @@ h1, h2, h3
   label, input, textarea, select
     width: 100%
     display: block    
-    box-sizing: border-box
 
   input, textarea, select
+    line-height: 1.5rem
     border-radius: 5px
     border: $gray solid 1px
     padding: 5px
-    margin-bottom: 10px
+    margin-bottom: 5px
 
     &:focus
       outline: none
@@ -516,7 +518,6 @@ h1, h2, h3
       transition: .1s 
 
 .info-modal-line 
-  box-sizing: border-box
   display: flex
   justify-content: flex-start
   width: 100%
