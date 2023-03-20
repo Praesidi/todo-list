@@ -28,32 +28,31 @@
       <div class="color-mode-container"></div>
     </header>
     <main class="main">
-      <div class="sidebar">
+      <div class="sidebar" id="sidebar">
         <h2>Main</h2>
         <!-- Main Menu Btns -->
         <div class="sidebar-btns-container">
-          <button id="inbox">
+          <div id="inbox">
             <i class="fa-solid fa-inbox fa-fw"></i>
             Inbox
-          </button>
-          <button id="today">
+          </div>
+          <div id="today">
             <i class="fa-solid fa-calendar-day fa-fw"></i>
             Today
-          </button>
-          <button id="upcoming">
+          </div>
+          <div id="upcoming">
             <i class="fa-solid fa-calendar-week fa-fw"></i>
             Upcoming
-          </button>
-          <button id="completed">
+          </div>
+          <div id="completed">
             <i class="fa-solid fa-calendar-check fa-fw"></i>
             Completed
-          </button>
-          <button id="important">
+          </div>
+          <div id="important">
             <i class="fa-solid fa-star fa-fw"></i>
             Important
-          </button>
+          </div>
         </div>
-
         <h2>Projects</h2>
         <!-- Add New Project Button -->
         <div class="add-project-btn-container">
@@ -63,62 +62,20 @@
           </button>
         </div>
         <!-- Projects Container -->
-        <div class="project-container" id="project-container">
-          <!-- Project Item -->
-          <div class="project-item">
-            <div class="project-info">
-              <p>Project Name</p>
-            </div>
-            <!-- Project's Popup menu -->
-            <div class="project-menu">
-              <button id="project-menu-btn">
-                <i class="fa-solid fa-ellipsis-vertical"></i>
-              </button>
-              <div class="project-popup-menu" id="project-menu">
-                <button id="project-edit-btn">Edit</button>
-                <button id="project-delete-btn">Delete</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="project-container" id="project-container"></div>
       </div>
       <!-- Main Container -->
       <div class="main-container">
-        <h2 id="current-page-title">Today</h2>
+        <h2 id="page-title">Today</h2>
         <!-- Add New Task Button -->
-        <div class="add-task-btn-container">
+        <div class="add-task-btn-container" id="add-task-btn-container">
           <button id="add-task-btn">
             <i class="fa-regular fa-plus"></i>
             Create New Task
           </button>
         </div>
         <!-- Tasks' Container -->
-        <div class="task-container" id="task-container">
-          <!-- Task Item -->
-          <!-- <div class="task-item">
-            <div class="task-item-check">
-              <input type="checkbox" />
-              <p>Task</p>
-            </div>
-            <div class="task-date-container">
-              <span id="task-date-el">12 may 2023</span>
-            </div>
-            <div class="task-item-btns">
-              <button title="Edit" id="edit-task">
-                <i class="fa-solid fa-pen-to-square fa-fw"></i>
-              </button>
-              <button title="Show info" id="show-task-info">
-                <i class="fa-solid fa-circle-info fa-fw"></i>
-              </button>
-              <button title="Mark as important" id="mark-important-task">
-                <i class="fa-regular fa-star fa-fw"></i>
-              </button>
-              <button title="Delete" id="delete-task">
-                <i class="fa-solid fa-trash-can fa-fw"></i>
-              </button>
-            </div>
-          </div> -->
-        </div>
+        <div class="task-container" id="task-container"></div>
       </div>
     </main>
     <footer class="footer">
