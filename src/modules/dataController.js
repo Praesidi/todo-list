@@ -127,6 +127,11 @@ const dataController = (() => {
     );
   };
 
+  const deleteFinishedTasks = () => {
+    console.log(taskCollection);
+    taskCollection = taskCollection.filter((task) => task.isDone !== true);
+  };
+
   const sortTaskCollection = (categoryID) => {
     if (categoryID === 'inbox') {
       return taskCollection;
@@ -202,6 +207,7 @@ const dataController = (() => {
 
   return {
     getProjectCollection,
+    deleteFinishedTasks,
     sortTaskCollection,
     getTaskCollection,
     getCurrentProject,
