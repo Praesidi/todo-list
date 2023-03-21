@@ -60,7 +60,7 @@ const domController = (() => {
 
   const markTaskImportant = (taskBtn, ...rest) => {
     const [status] = rest;
-    console.log(taskBtn);
+
     if (status) {
       taskBtn.classList.remove('fa-regular');
       taskBtn.classList.add('important', 'fa-solid');
