@@ -144,7 +144,7 @@ h1, h2, h3
       outline: none
 
     &:hover
-      background: $light-gray
+      background: $extra-light-gray
       border-color: $primary-color
       border-radius: 10px
       scale: 1.03
@@ -175,10 +175,6 @@ h1, h2, h3
   p, 
   .project-info
     pointer-events: none
-
-
-.active-project
-  scale: 1.02
 
 /* Project Item -> Project Info */
 .project-info
@@ -274,6 +270,13 @@ h1, h2, h3
     &:active
       scale: 1
       transition: .1s
+
+#delete-tasks-btn
+  &:hover
+    border-color: $red
+
+  i
+    color: $red
 
 /* Container -> Task Container */
 .task-container
