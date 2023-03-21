@@ -175,17 +175,28 @@ const handlersController = (() => {
   const handleProjectForm = (e) => {
     e.preventDefault();
     const projectCollection = dataController.getProjectCollection();
-    // dataController.setCurrentProject();
+    let projectToSelect = {};
 
     if (projectModalMode === 'create') {
       const project = dataController.createNewProject(projectTitle.value);
+
+      const _projectCollection = dataController.getProjectCollection(); // collection after adding new project
+      const lastProject = _projectCollection[_projectCollection.length - 1];
+      dataController.setCurrentProject(lastProject.id); // last project is active project now
+      projectToSelect = lastProject;
     }
 
     if (projectModalMode === 'edit') {
       dataController.editProject(projectToEdit, projectTitle.value);
+      dataController.setCurrentProject(projectToEdit.id); // test
+      projectToSelect = projectToEdit;
     }
 
     domController.populateProjectContainer(projectCollection);
+    // select created or edited project
+    const lastProjectCard = document
+      .querySelector('[data-id="' + projectToSelect.id + '"]')
+      .click();
     projectToEdit = {};
     closeProjectModal();
   };
@@ -255,6 +266,8 @@ const handlersController = (() => {
     if (target.id === 'project-delete-btn') {
       dataController.deleteProject(projectID);
       domController.deleteProject(projectCard);
+      dataController.deleteTaskGroup(projectID);
+      const inbox = document.getElementById('inbox').click();
     }
   };
 
@@ -262,9 +275,10 @@ const handlersController = (() => {
   const addBtnContainer = document.getElementById('add-task-btn-container');
   const sidebar = document.getElementById('sidebar');
 
-  // TODO: make created project active
   // TODO: rerender task container after manipulation
   // TODO: style finished tasks
+  // TODO: save all tasks and projects to the local storage
+  // TODO: delete all tasks belonging to the project after deleting that project
 
   const handleCategorySelectors = (e) => {
     const target = e.target;
@@ -274,9 +288,12 @@ const handlersController = (() => {
     if (projectID !== null) {
       domController.createAddTaskBtn(addBtnContainer);
       pageTitle.textContent = projectObj.title;
-      domController.populateTaskContainer(
-        dataController.sortTaskCollection(target.id)
-      );
+
+      if (dataController.getTaskCollection().length !== 0) {
+        domController.populateTaskContainer(
+          dataController.sortTaskCollection(projectID)
+        );
+      }
     }
 
     if (target.id === 'inbox') {
