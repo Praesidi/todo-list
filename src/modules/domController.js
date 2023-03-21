@@ -122,6 +122,18 @@ const domController = (() => {
     element.innerHTML = addBtn;
   };
 
+  const createDeleteTasksBtn = (element) => {
+    const deleteBtn = String.raw`
+      <button id="delete-tasks-btn">
+        <i class="fa-regular fa-trash-can"></i>
+        Delete Finished Tasks
+      </button>
+    `;
+
+    element.textContent = '';
+    element.innerHTML = deleteBtn;
+  };
+
   return {
     deleteTask,
     createTask,
@@ -129,6 +141,7 @@ const domController = (() => {
     deleteProject,
     createAddTaskBtn,
     markTaskImportant,
+    createDeleteTasksBtn,
     populateTaskContainer,
     populateProjectContainer,
   };
