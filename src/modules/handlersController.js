@@ -116,7 +116,9 @@ const handlersController = (() => {
 
     infoModalTitle.textContent = obj.title;
     infoModalPriority.textContent = obj.priority;
-    infoModalProject.textContent = obj.project;
+    infoModalProject.textContent = dataController.getProjectObject(
+      obj.project
+    ).title;
 
     obj.description === ''
       ? (infoModalDescription.textContent = 'Not Set')
@@ -201,6 +203,8 @@ const handlersController = (() => {
     closeProjectModal();
   };
 
+  let currentPageMode = 'inbox'; // test
+
   const handleTaskCardBtns = (e) => {
     const target = e.target;
     const taskID = target.parentNode.parentNode.getAttribute('data-id');
@@ -276,9 +280,7 @@ const handlersController = (() => {
   const sidebar = document.getElementById('sidebar');
 
   // TODO: rerender task container after manipulation
-  // TODO: style finished tasks
   // TODO: save all tasks and projects to the local storage
-  // TODO: delete all tasks belonging to the project after deleting that project
 
   const handleCategorySelectors = (e) => {
     const target = e.target;
@@ -288,6 +290,7 @@ const handlersController = (() => {
     if (projectID !== null) {
       domController.createAddTaskBtn(addBtnContainer);
       pageTitle.textContent = projectObj.title;
+      currentPageMode = 'project';
 
       if (dataController.getTaskCollection().length !== 0) {
         domController.populateTaskContainer(
@@ -299,6 +302,7 @@ const handlersController = (() => {
     if (target.id === 'inbox') {
       addBtnContainer.textContent = '';
       pageTitle.textContent = 'Inbox';
+      currentPageMode = 'inbox';
       domController.populateTaskContainer(
         dataController.sortTaskCollection('inbox')
       );
@@ -307,6 +311,7 @@ const handlersController = (() => {
     if (target.id === 'today') {
       addBtnContainer.textContent = '';
       pageTitle.textContent = 'Today';
+      currentPageMode = 'today';
       domController.populateTaskContainer(
         dataController.sortTaskCollection('today')
       );
@@ -315,14 +320,16 @@ const handlersController = (() => {
     if (target.id === 'upcoming') {
       addBtnContainer.textContent = '';
       pageTitle.textContent = 'Upcoming';
+      currentPageMode = 'upcoming';
       domController.populateTaskContainer(
         dataController.sortTaskCollection('upcoming')
       );
     }
 
     if (target.id === 'completed') {
-      addBtnContainer.textContent = '';
+      domController.createDeleteTasksBtn(addBtnContainer);
       pageTitle.textContent = 'Completed';
+      currentPageMode = 'completed';
       domController.populateTaskContainer(
         dataController.sortTaskCollection('completed')
       );
@@ -331,6 +338,7 @@ const handlersController = (() => {
     if (target.id === 'important') {
       addBtnContainer.textContent = '';
       pageTitle.textContent = 'Important';
+      currentPageMode = 'important';
       domController.populateTaskContainer(
         dataController.sortTaskCollection('important')
       );
@@ -350,6 +358,10 @@ const handlersController = (() => {
   addBtnContainer.addEventListener('click', (e) => {
     if (e.target.id === 'add-task-btn') {
       openTaskModal();
+    }
+
+    if (e.target.id === 'delete-tasks-btn') {
+      dataController.deleteFinishedTasks();
     }
   });
   addProjectBtn.addEventListener('click', openProjectModal);
