@@ -121,6 +121,12 @@ const dataController = (() => {
     taskCollection.splice(taskIndex, 1);
   };
 
+  const deleteTaskGroup = (projectID) => {
+    taskCollection = taskCollection.filter(
+      (task) => task.project !== projectID
+    );
+  };
+
   const sortTaskCollection = (categoryID) => {
     if (categoryID === 'inbox') {
       return taskCollection;
@@ -185,12 +191,12 @@ const dataController = (() => {
       const sortedTaskCollection = [];
 
       taskCollection.forEach((task) => {
-        if (task.id === categoryID) {
+        if (task.project === categoryID) {
           sortedTaskCollection.push(task);
         }
       });
 
-      return sortTaskCollection;
+      return sortedTaskCollection;
     }
   };
 
@@ -203,6 +209,7 @@ const dataController = (() => {
     markTaskImportant,
     createNewProject,
     getProjectObject,
+    deleteTaskGroup,
     deleteProject,
     getTaskObject,
     createNewTask,
