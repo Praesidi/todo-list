@@ -392,7 +392,3 @@ const handlersController = (() => {
 })();
 
 export default handlersController;
-
-// TODO: save all tasks and projects to the local storage
-// TODO: use inbox as a default mode in local storage
-// FIXME: tasks with due date in next month are not appearing in upcoming category
