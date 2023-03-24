@@ -44,6 +44,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "nanoid": "^4.0.1",
     "normalize.css": "^8.0.1"
   }
