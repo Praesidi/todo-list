@@ -5,7 +5,11 @@ const domController = (() => {
   const projectContainer = document.getElementById('project-container');
 
   const createTask = (task) => {
-    const dueDate = format(new Date(task.dueDate), 'dd/MM/yyyy');
+    let dueDate;
+
+    if (task.dueDate !== '') {
+      dueDate = format(new Date(task.dueDate), 'dd/MM/yyyy');
+    }
 
     const taskItem = String.raw`
       <div class="task-item 
