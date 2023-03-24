@@ -1,9 +1,9 @@
 import './styles/main.sass';
 import dataController from './modules/dataController';
 import domController from './modules/domController';
-import storageController from './modules/storageController';
+//import storageController from './modules/storageController';
 
-const loadFromLocalStorage = () => {
+/* const loadFromLocalStorage = () => {
   // check if there is any item in the local storage
   if (
     localStorage.getItem('taskCollection') !== null ||
@@ -14,4 +14,4 @@ const loadFromLocalStorage = () => {
     );
     dataController.setTaskCollection(storageController.getTaskCollection());
   }
-};
+}; */
