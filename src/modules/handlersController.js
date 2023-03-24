@@ -1,4 +1,3 @@
-// this module controls modals, settings, event listeners
 import dataController from './dataController.js';
 import domController from './domController.js';
 
@@ -203,18 +202,37 @@ const handlersController = (() => {
     closeProjectModal();
   };
 
-  let currentPageMode = 'inbox'; // test
+  let currentPageMode = 'inbox';
+
+  const updateContainer = (projectID) => {
+    if (currentPageMode !== 'project') {
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection(`${currentPageMode}`)
+      );
+    }
+
+    if (currentPageMode === 'project') {
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection(`${projectID}`)
+      );
+    }
+  };
 
   const handleTaskCardBtns = (e) => {
+    // checks if any button in the task card were clicked
     const target = e.target;
     const taskID = target.parentNode.parentNode.getAttribute('data-id');
     const taskCard = target.parentNode.parentNode;
     const taskObj = dataController.getTaskObject(taskID);
 
-    if (target.id === 'task-checkbox' && target.checked) {
-      dataController.markTaskDone(taskObj);
-    } else {
-      dataController.markTaskDone(taskObj, 1);
+    if (target.id === 'task-checkbox') {
+      if (target.checked) {
+        dataController.markTaskDone(taskObj); // mark not done
+        updateContainer(taskObj.project);
+      } else {
+        dataController.markTaskDone(taskObj, 1); // mark done
+        updateContainer(taskObj.project);
+      }
     }
 
     if (target.id === 'edit-task') {
@@ -239,9 +257,11 @@ const handlersController = (() => {
       if (taskObj.isImportant) {
         dataController.markTaskImportant(taskObj);
         domController.markTaskImportant(target.firstElementChild);
+        updateContainer(taskObj.project);
       } else {
         dataController.markTaskImportant(taskObj, 1);
         domController.markTaskImportant(target.firstElementChild, 1);
+        updateContainer(taskObj.project);
       }
     }
 
@@ -278,9 +298,6 @@ const handlersController = (() => {
   const pageTitle = document.getElementById('page-title');
   const addBtnContainer = document.getElementById('add-task-btn-container');
   const sidebar = document.getElementById('sidebar');
-
-  // TODO: rerender task container after manipulation
-  // TODO: save all tasks and projects to the local storage
 
   const handleCategorySelectors = (e) => {
     const target = e.target;
@@ -362,6 +379,7 @@ const handlersController = (() => {
 
     if (e.target.id === 'delete-tasks-btn') {
       dataController.deleteFinishedTasks();
+      taskContainer.textContent = '';
     }
   });
   addProjectBtn.addEventListener('click', openProjectModal);
@@ -374,3 +392,7 @@ const handlersController = (() => {
 })();
 
 export default handlersController;
+
+// TODO: save all tasks and projects to the local storage
+// TODO: use inbox as a default mode in local storage
+// FIXME: tasks with due date in next month are not appearing in upcoming category
