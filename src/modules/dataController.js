@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
+import { isFuture, isToday, parseISO } from 'date-fns';
 import storageController from './storageController.js';
-
-// this module controls creating, editing, deleting of tasks and projects
 
 const dataController = (() => {
   let projectCollection = [];
@@ -45,7 +44,6 @@ const dataController = (() => {
     return projectObj;
   };
 
-  // TODO: write a function to set default value for current project onload
   let currentProject;
   const setCurrentProject = (projectID) => {
     currentProject = projectID;
@@ -158,13 +156,12 @@ const dataController = (() => {
 
     if (categoryID === 'today') {
       const sortedTaskCollection = [];
-      const today = new Date();
 
       taskCollection.forEach((task) => {
         if (
           !task.isDone &&
           task.dueDate !== '' &&
-          formatDate(task.dueDate) === formatDate(today)
+          isToday(parseISO(task.dueDate))
         ) {
           sortedTaskCollection.push(task);
         }
@@ -174,14 +171,12 @@ const dataController = (() => {
 
     if (categoryID === 'upcoming') {
       const sortedTaskCollection = [];
-      const today = new Date();
 
       taskCollection.forEach((task) => {
         if (
           !task.isDone &&
           task.dueDate !== '' &&
-          formatDate(task.dueDate) !== formatDate(today) &&
-          formatDate(task.dueDate) > formatDate(today)
+          isFuture(parseISO(task.dueDate))
         ) {
           sortedTaskCollection.push(task);
         }

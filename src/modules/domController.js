@@ -1,16 +1,11 @@
-// this module controls adding and deleting tasks and projects in DOM
+import { format } from 'date-fns';
 
 const domController = (() => {
   const taskContainer = document.getElementById('task-container');
   const projectContainer = document.getElementById('project-container');
 
   const createTask = (task) => {
-    const dueDate = new Date(task.dueDate);
-    const day = dueDate.getDate();
-    const month = dueDate.getMonth() + 1;
-    const year = dueDate.getFullYear();
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = month < 10 ? `0${month}` : month;
+    const dueDate = format(new Date(task.dueDate), 'dd/MM/yyyy');
 
     const taskItem = String.raw`
       <div class="task-item 
@@ -33,7 +28,7 @@ const domController = (() => {
           <span id="task-date-el">${
             task.dueDate === ''
               ? 'Due Date: Not Selected'
-              : `Due Date: ${formattedDay}-${formattedMonth}-${year}`
+              : `Due Date: ${dueDate}`
           }</span>
             </div>
         <div class="task-item-btns">
