@@ -5,6 +5,13 @@ const domController = (() => {
   const projectContainer = document.getElementById('project-container');
 
   const createTask = (task) => {
+    const dueDate = new Date(task.dueDate);
+    const day = dueDate.getDate();
+    const month = dueDate.getMonth() + 1;
+    const year = dueDate.getFullYear();
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+
     const taskItem = String.raw`
       <div class="task-item 
         ${
@@ -16,7 +23,7 @@ const domController = (() => {
         }" 
         data-id="${task.id}"
       >
-        <div class="task-item-checkbox">
+        <div class="task-item-checkbox ${task.isDone ? ' finished' : ''}">
           <input type="checkbox" id="task-checkbox" ${
             task.isDone ? ' checked' : ''
           }/>
@@ -26,7 +33,7 @@ const domController = (() => {
           <span id="task-date-el">${
             task.dueDate === ''
               ? 'Due Date: Not Selected'
-              : `Due Date: ${task.dueDate}`
+              : `Due Date: ${formattedDay}-${formattedMonth}-${year}`
           }</span>
             </div>
         <div class="task-item-btns">

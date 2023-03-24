@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import storageController from './storageController.js';
 
 // this module controls creating, editing, deleting of tasks and projects
 
@@ -128,27 +129,43 @@ const dataController = (() => {
   };
 
   const deleteFinishedTasks = () => {
-    console.log(taskCollection);
     taskCollection = taskCollection.filter((task) => task.isDone !== true);
+  };
+
+  const formatDate = (dateValue) => {
+    const datePickerDate = new Date(dateValue);
+    const day = datePickerDate.getDate();
+    const month = datePickerDate.getMonth() + 1;
+    const year = datePickerDate.getFullYear();
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+
+    return `${formattedDay}.${formattedMonth}.${year}`;
   };
 
   const sortTaskCollection = (categoryID) => {
     if (categoryID === 'inbox') {
-      return taskCollection;
+      const sortedTaskCollection = [];
+
+      taskCollection.forEach((task) => {
+        if (!task.isDone) {
+          sortedTaskCollection.push(task);
+        }
+      });
+
+      return sortedTaskCollection;
     }
 
     if (categoryID === 'today') {
-      const todaysDate = new Date().toLocaleDateString();
       const sortedTaskCollection = [];
-      console.log(typeof todaysDate);
+      const today = new Date();
 
       taskCollection.forEach((task) => {
-        console.log(typeof task.dueDate);
         if (
+          !task.isDone &&
           task.dueDate !== '' &&
-          task.dueDate.toDateString() === todaysDate.toDateString()
+          formatDate(task.dueDate) === formatDate(today)
         ) {
-          console.log(task.dueDate.toDateString());
           sortedTaskCollection.push(task);
         }
       });
@@ -157,16 +174,18 @@ const dataController = (() => {
 
     if (categoryID === 'upcoming') {
       const sortedTaskCollection = [];
+      const today = new Date();
 
       taskCollection.forEach((task) => {
         if (
+          !task.isDone &&
           task.dueDate !== '' &&
-          task.dueDate.toDateString() !== todaysDate.toDateString()
+          formatDate(task.dueDate) !== formatDate(today) &&
+          formatDate(task.dueDate) > formatDate(today)
         ) {
           sortedTaskCollection.push(task);
         }
       });
-
       return sortedTaskCollection;
     }
 
@@ -186,7 +205,7 @@ const dataController = (() => {
       const sortedTaskCollection = [];
 
       taskCollection.forEach((task) => {
-        if (task.isImportant) {
+        if (!task.isDone && task.isImportant) {
           sortedTaskCollection.push(task);
         }
       });
