@@ -34,6 +34,10 @@ const dataController = (() => {
     return projectCollection;
   };
 
+  const setProjectCollection = (array) => {
+    projectCollection = array;
+  };
+
   const getProjectObject = (projectID) => {
     let projectObj = {};
     projectCollection.forEach((project) => {
@@ -76,6 +80,10 @@ const dataController = (() => {
 
   const getTaskCollection = () => {
     return taskCollection;
+  };
+
+  const setTaskCollection = (array) => {
+    taskCollection = array;
   };
 
   const getTaskObject = (taskID) => {
@@ -128,17 +136,6 @@ const dataController = (() => {
 
   const deleteFinishedTasks = () => {
     taskCollection = taskCollection.filter((task) => task.isDone !== true);
-  };
-
-  const formatDate = (dateValue) => {
-    const datePickerDate = new Date(dateValue);
-    const day = datePickerDate.getDate();
-    const month = datePickerDate.getMonth() + 1;
-    const year = datePickerDate.getFullYear();
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = month < 10 ? `0${month}` : month;
-
-    return `${formattedDay}.${formattedMonth}.${year}`;
   };
 
   const sortTaskCollection = (categoryID) => {
@@ -221,9 +218,11 @@ const dataController = (() => {
 
   return {
     getProjectCollection,
+    setProjectCollection,
     deleteFinishedTasks,
     sortTaskCollection,
     getTaskCollection,
+    setTaskCollection,
     getCurrentProject,
     setCurrentProject,
     markTaskImportant,
