@@ -1,5 +1,6 @@
 import dataController from './dataController.js';
 import domController from './domController.js';
+import storageController from './storageController.js';
 
 const handlersController = (() => {
   // task modal
@@ -166,7 +167,14 @@ const handlersController = (() => {
       );
       closeTaskModal();
     }
-    domController.populateTaskContainer(taskCollection);
+
+    domController.populateTaskContainer(
+      dataController.sortTaskCollection(dataController.getCurrentProject())
+    );
+    storageController.saveToLocalStorage(
+      dataController.getTaskCollection(),
+      dataController.getProjectCollection()
+    );
     taskToEdit = {};
   };
 
@@ -199,6 +207,10 @@ const handlersController = (() => {
       .querySelector('[data-id="' + projectToSelect.id + '"]')
       .click();
     projectToEdit = {};
+    storageController.saveToLocalStorage(
+      dataController.getTaskCollection(),
+      dataController.getProjectCollection()
+    );
     closeProjectModal();
   };
 
@@ -269,6 +281,11 @@ const handlersController = (() => {
       dataController.deleteTask(taskID);
       domController.deleteTask(taskCard);
     }
+
+    storageController.saveToLocalStorage(
+      dataController.getTaskCollection(),
+      dataController.getProjectCollection()
+    );
   };
 
   const handleProjectCardBtns = (e) => {
@@ -291,6 +308,10 @@ const handlersController = (() => {
       dataController.deleteProject(projectID);
       domController.deleteProject(projectCard);
       dataController.deleteTaskGroup(projectID);
+      storageController.saveToLocalStorage(
+        dataController.getTaskCollection(),
+        dataController.getProjectCollection()
+      );
       const inbox = document.getElementById('inbox').click();
     }
   };
@@ -305,6 +326,7 @@ const handlersController = (() => {
     const projectObj = dataController.getProjectObject(projectID);
 
     if (projectID !== null) {
+      dataController.setCurrentProject(projectID);
       domController.createAddTaskBtn(addBtnContainer);
       pageTitle.textContent = projectObj.title;
       currentPageMode = 'project';
@@ -380,6 +402,10 @@ const handlersController = (() => {
     if (e.target.id === 'delete-tasks-btn') {
       dataController.deleteFinishedTasks();
       taskContainer.textContent = '';
+      storageController.saveToLocalStorage(
+        dataController.getTaskCollection(),
+        dataController.getProjectCollection()
+      );
     }
   });
   addProjectBtn.addEventListener('click', openProjectModal);
