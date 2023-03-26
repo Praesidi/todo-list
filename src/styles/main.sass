@@ -46,7 +46,6 @@ h1, h2, h3
   height: $header-height
   
 .hamburger-menu-container
-  // position: relative
   display: flex
   justify-content: center
   align-items: center
@@ -94,9 +93,6 @@ h1, h2, h3
     opacity: 0
     width: 0
 
-  &:has(input:checked) + .sidebar 
-    transform: translate (0) !important
-
 .logo-container
   display: flex
   align-items: center
@@ -124,14 +120,13 @@ h1, h2, h3
 /* Main -> Sidebar */  
 .sidebar
   grid-column: 1 / 4
+  display: block
   background: $extra-light-gray
   height: calc((100vh - $header-height) - $footer-height)
   padding: 15px 15px 30px
   overflow-y: scroll
   z-index: 9999
   transition: translate $animation-timing
-  translate: 0
-  
 
   h2
     display: block
@@ -611,7 +606,7 @@ h1, h2, h3
   .sidebar
     position: absolute
     box-shadow: 5px 0 10px -2px $gray
-    translate: -100%
+    display: none
 
   .project-menu
     position: relative
@@ -622,7 +617,6 @@ h1, h2, h3
 
   .hamburger-menu
     display: flex
-
 
 @media (max-width: 620px)
   .task-date-container
@@ -635,3 +629,11 @@ h1, h2, h3
 @media (max-width: 420px)
   .footer
     font-size: 12px
+
+  .sidebar
+    width: 100vw
+
+  .project-popup-menu
+    scale: 1.2
+    left: -50px
+    bottom: 30px 
