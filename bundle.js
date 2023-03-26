@@ -536,7 +536,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/main.sass */ \"./src/styles/main.sass\");\n/* harmony import */ var _modules_handlersController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/handlersController */ \"./src/modules/handlersController.js\");\n/* harmony import */ var _modules_dataController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/dataController */ \"./src/modules/dataController.js\");\n/* harmony import */ var _modules_domController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/domController */ \"./src/modules/domController.js\");\n/* harmony import */ var _modules_storageController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/storageController */ \"./src/modules/storageController.js\");\n\n\n\n\n\n\nconst createDefaultProject = () => {\n  const defaultTestCollection = [\n    {\n      title: 'test task',\n      id: '000000001',\n      project: '00001',\n      description: 'write anything you want',\n      priority: 'medium',\n      dueDate: '',\n      isImportant: true,\n      isDone: false,\n    },\n  ];\n  const defaultProjectCollection = [{ title: 'test project', id: '00001' }];\n\n  _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setTaskCollection(defaultTestCollection);\n  _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setProjectCollection(defaultProjectCollection);\n  _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateTaskContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getTaskCollection());\n  _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateProjectContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getProjectCollection());\n};\n\nconst checkLocalStorage = () => {\n  let tasks = JSON.parse(localStorage.getItem('taskCollection'));\n  let projects = JSON.parse(localStorage.getItem('projectCollection'));\n  if (tasks !== null || projects !== null) {\n    _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setTaskCollection(tasks);\n    _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setProjectCollection(projects);\n    _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateTaskContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getTaskCollection());\n    _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateProjectContainer(\n      _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getProjectCollection()\n    );\n  } else {\n    createDefaultProject();\n  }\n};\n\ncheckLocalStorage();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_main_sass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles/main.sass */ \"./src/styles/main.sass\");\n/* harmony import */ var _modules_handlersController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/handlersController */ \"./src/modules/handlersController.js\");\n/* harmony import */ var _modules_dataController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/dataController */ \"./src/modules/dataController.js\");\n/* harmony import */ var _modules_domController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/domController */ \"./src/modules/domController.js\");\n/* harmony import */ var _modules_storageController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/storageController */ \"./src/modules/storageController.js\");\n/* harmony import */ var _img_logo_png__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./img/logo.png */ \"./src/img/logo.png\");\n/* harmony import */ var _img_favicon_png__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./img/favicon.png */ \"./src/img/favicon.png\");\n\n\n\n\n\n\n\n\nconst createDefaultProject = () => {\n  const defaultTestCollection = [\n    {\n      title: 'test task',\n      id: '000000001',\n      project: '00001',\n      description: 'write anything you want',\n      priority: 'medium',\n      dueDate: '',\n      isImportant: true,\n      isDone: false,\n    },\n  ];\n  const defaultProjectCollection = [{ title: 'test project', id: '00001' }];\n\n  _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setTaskCollection(defaultTestCollection);\n  _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setProjectCollection(defaultProjectCollection);\n  _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateTaskContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getTaskCollection());\n  _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateProjectContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getProjectCollection());\n};\n\nconst checkLocalStorage = () => {\n  let tasks = JSON.parse(localStorage.getItem('taskCollection'));\n  let projects = JSON.parse(localStorage.getItem('projectCollection'));\n  if (tasks !== null || projects !== null) {\n    _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setTaskCollection(tasks);\n    _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].setProjectCollection(projects);\n    _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateTaskContainer(_modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getTaskCollection());\n    _modules_domController__WEBPACK_IMPORTED_MODULE_3__[\"default\"].populateProjectContainer(\n      _modules_dataController__WEBPACK_IMPORTED_MODULE_2__[\"default\"].getProjectCollection()\n    );\n  } else {\n    createDefaultProject();\n  }\n};\n\ncheckLocalStorage();\n\n\n//# sourceURL=webpack://todo-list/./src/index.js?");
 
 /***/ }),
 
@@ -577,6 +577,26 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst storageController = (() => {\n  const saveToLocalStorage = (tasks, projects) => {\n    // save items to local storage\n    const taskCollection = JSON.stringify(tasks);\n    const projectCollection = JSON.stringify(projects);\n\n    localStorage.setItem('taskCollection', taskCollection);\n    localStorage.setItem('projectCollection', projectCollection);\n  };\n\n  let retrievedTaskCollection = [];\n  let retrievedProjectCollection = [];\n\n  const readFromLocalStorage = () => {\n    // get items from the local storage\n    retrievedTaskCollection = JSON.parse(\n      localStorage.getItem('taskCollection')\n    );\n    retrievedProjectCollection = JSON.parse(\n      localStorage.getItem('projectCollection')\n    );\n  };\n\n  return {\n    saveToLocalStorage,\n    readFromLocalStorage,\n  };\n})();\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (storageController);\n\n\n//# sourceURL=webpack://todo-list/./src/modules/storageController.js?");
+
+/***/ }),
+
+/***/ "./src/img/favicon.png":
+/*!*****************************!*\
+  !*** ./src/img/favicon.png ***!
+  \*****************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"9ffd6c9b713fcaade050.png\";\n\n//# sourceURL=webpack://todo-list/./src/img/favicon.png?");
+
+/***/ }),
+
+/***/ "./src/img/logo.png":
+/*!**************************!*\
+  !*** ./src/img/logo.png ***!
+  \**************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("module.exports = __webpack_require__.p + \"13884071363846e904b4.png\";\n\n//# sourceURL=webpack://todo-list/./src/img/logo.png?");
 
 /***/ }),
 
@@ -665,6 +685,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		__webpack_require__.p = "/dist";
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/nonce */

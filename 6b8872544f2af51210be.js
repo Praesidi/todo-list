@@ -3,6 +3,8 @@ import handlersController from './modules/handlersController';
 import dataController from './modules/dataController';
 import domController from './modules/domController';
 import storageController from './modules/storageController';
+import logo from './img/logo.png';
+import favicon from './img/favicon.png';
 
 const createDefaultProject = () => {
   const defaultTestCollection = [
