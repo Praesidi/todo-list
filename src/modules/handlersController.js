@@ -316,9 +316,40 @@ const handlersController = (() => {
     }
   };
 
+  const hamburgerMenuBtn = document.getElementById('hamburger-menu-btn');
+  const sidebar = document.getElementById('sidebar');
+
+  // shows and hides the sidebar
+  const handleHamburgerMenu = () => {
+    if (!hamburgerMenuBtn.checked) {
+      sidebar.style.display = 'none';
+    } else {
+      sidebar.style.display = 'block';
+    }
+  };
+
+  // close the sidebar when the user selects category or project
+  const closeSidebarForMobiles = () => {
+    if (window.matchMedia('screen and (max-width:420px)').matches) {
+      hamburgerMenuBtn.checked = false;
+      sidebar.style.display = 'none';
+    }
+  };
+
+  // fix a bug when after resize the sidebar disappears
+  const showSidebarAfterResize = () => {
+    if (window.matchMedia('screen and (min-width:860px)').matches) {
+      sidebar.style.display = 'block';
+      if (sidebar.style.display === 'block') {
+        hamburgerMenuBtn.checked = true;
+      } else {
+        hamburgerMenuBtn.checked = false;
+      }
+    }
+  };
+
   const pageTitle = document.getElementById('page-title');
   const addBtnContainer = document.getElementById('add-task-btn-container');
-  const sidebar = document.getElementById('sidebar');
 
   const handleCategorySelectors = (e) => {
     const target = e.target;
@@ -382,6 +413,7 @@ const handlersController = (() => {
         dataController.sortTaskCollection('important')
       );
     }
+    closeSidebarForMobiles();
   };
 
   document.addEventListener('click', (e) => {
@@ -389,6 +421,7 @@ const handlersController = (() => {
       hideProjectsMenu();
     }
   });
+  window.addEventListener('resize', showSidebarAfterResize);
   sidebar.addEventListener('click', handleCategorySelectors);
   taskContainer.addEventListener('click', handleTaskCardBtns);
   projectContainer.addEventListener('click', handleProjectCardBtns);
@@ -412,6 +445,7 @@ const handlersController = (() => {
   closeTaskModalBtn.addEventListener('click', closeTaskModal);
   closeProjectModalBtn.addEventListener('click', closeProjectModal);
   closeInfoModalBtn.addEventListener('click', closeInfoModal);
+  hamburgerMenuBtn.addEventListener('click', handleHamburgerMenu);
 
   taskForm.addEventListener('submit', handleTaskForm);
   projectForm.addEventListener('submit', handleProjectForm);
