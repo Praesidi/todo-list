@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="/dist/9ffd6c9b713fcaade050.png" />
+    <link rel="icon" href="../src/img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,17 +15,20 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
     />
-    <script type="text/javascript" src="/dist/efdd1df89291085be944.js" defer></script>
+    <script type="application/javascript" src="../src/index.js" defer></script>
     <title>to.do</title>
-  <script defer src="/dist/bundle.js"></script></head>
+  <script defer src="bundle.js"></script></head>
   <body>
     <header class="header">
-      <div class="hamburger-menu-container"></div>
+      <div class="hamburger-menu-container">
+        <label class="hamburger-menu">
+          <input type="checkbox" id="hamburger-menu-btn" />
+        </label>
+      </div>
       <div class="logo-container">
-        <img src="/dist/13884071363846e904b4.png" alt="" />
+        <img src="../src/img/logo.png" alt="" />
         <p>to<span>.do</span></p>
       </div>
-      <div class="color-mode-container"></div>
     </header>
     <main class="main">
       <div class="sidebar" id="sidebar">
@@ -66,7 +69,7 @@
       </div>
       <!-- Main Container -->
       <div class="main-container">
-        <h2 id="page-title"></h2>
+        <h2 id="page-title">Inbox</h2>
         <!-- Add New Task Button -->
         <div class="add-task-btn-container" id="add-task-btn-container"></div>
         <!-- Tasks' Container -->
