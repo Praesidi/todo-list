@@ -6,7 +6,6 @@ const storageController = (() => {
 
     localStorage.setItem('taskCollection', taskCollection);
     localStorage.setItem('projectCollection', projectCollection);
-    console.log('success');
   };
 
   let retrievedTaskCollection = [];
@@ -29,5 +28,3 @@ const storageController = (() => {
 })();
 
 export default storageController;
-
-// TODO: save collections each time changes are made
