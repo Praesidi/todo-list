@@ -11,6 +11,16 @@ $white: #FFFFFF
 $red: #DC2626
 $header-height: 60px
 $footer-height: 30px
+
+// hamburger menu variables
+$bar-width: 30px
+$bar-height: 5px
+$hamburger-gap: 3px
+$foreground: #F5F8FA
+$hamburger-margin: 40px
+$animation-timing: 0.2s ease-in-out
+$hamburger-height: calc(($bar-height * 3) + ($hamburger-gap * 2))
+$x-width: calc($hamburger-height * 1.41421356237)
   
 *
   box-sizing: border-box
@@ -26,16 +36,67 @@ h1, h2, h3
   font-family: 'Sono', sans-serif
   margin: 0
 
-
 /* Header */ 
 .header
   display: flex
-  justify-content: space-evenly
+  justify-content: center
   align-items: center
   background: $alt-primary-color
   padding: 0 20px
   height: $header-height
   
+.hamburger-menu-container
+  // position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+
+.hamburger-menu
+  display: none
+  flex-direction: column
+  gap: $hamburger-gap
+  width: max-content
+  position: absolute
+  left: $hamburger-margin
+  z-index: 2
+  cursor: pointer
+
+.hamburger-menu
+  &::before,
+  &::after,
+  input
+    content: ""
+    width: $bar-width
+    height: $bar-height
+    background-color: $foreground
+    border-radius: 9999px
+    transform-origin: left center
+    transition: opacity $animation-timing, width $animation-timing, transform $animation-timing, background-color $animation-timing
+
+  input
+    appearance: none
+    padding: 0
+    margin: 0
+    outline: none
+    pointer-events: none
+
+  &:has(input:checked)::before 
+    transform: rotate(45deg)
+    width: $x-width
+    translate: 0 calc($bar-height / -2)
+
+  &:has(input:checked)::after 
+    transform: rotate(-45deg)
+    width: $x-width
+    translate: 0 calc($bar-height / 2)
+
+  input:checked 
+    opacity: 0
+    width: 0
+
+  &:has(input:checked) + .sidebar 
+    transform: translate (0) !important
+
 .logo-container
   display: flex
   align-items: center
@@ -67,6 +128,10 @@ h1, h2, h3
   height: calc((100vh - $header-height) - $footer-height)
   padding: 15px 15px 30px
   overflow-y: scroll
+  z-index: 9999
+  transition: translate $animation-timing
+  translate: 0
+  
 
   h2
     display: block
@@ -282,8 +347,6 @@ h1, h2, h3
 .task-container
   padding: 5px 10px 5px 5px
   width: 100%
-  // height: calc((100vh - $header-height) - $footer-height - 150px)
-  // overflow-y: scroll
 
 /* Task Container -> Task Item */
 .task-item
@@ -315,8 +378,8 @@ h1, h2, h3
   input[type='checkbox']
     display: block
     margin-right: 15px 
-    width:15px
-    height: 15px
+    min-width:15px
+    min-height: 15px
     border-radius: 50%
     border: $primary-color solid 1px
     outline: none
@@ -391,6 +454,7 @@ h1, h2, h3
   justify-content: center
   align-items: center
   font-family: 'Sono', sans-serif
+  padding: 5px
 
   p
     text-align: center
@@ -447,6 +511,20 @@ h1, h2, h3
 
   h2
     margin-bottom: 20px
+
+.info-modal-line 
+  display: flex
+  justify-content: flex-start
+  width: 100%
+  padding: 0 15px
+  
+  p:first-of-type
+    font-weight: 500
+    margin-right: 10px
+  
+  p:nth-of-type(2)
+    //font-style: italic
+    color: $dark-gray 
 
 /* Modal -> Close Modal Button*/
 .close-modal-btn-container
@@ -526,16 +604,34 @@ h1, h2, h3
       scale: 1
       transition: .1s 
 
-.info-modal-line 
-  display: flex
-  justify-content: flex-start
-  width: 100%
-  padding: 0 15px
-  
-  p:first-of-type
-    font-weight: 500
-    margin-right: 10px
-  
-  p:nth-of-type(2)
-    font-style: italic
+@media (max-width: 860px)
+  .main-container
+    grid-column: 1 / 13
 
+  .sidebar
+    position: absolute
+    box-shadow: 5px 0 10px -2px $gray
+    translate: -100%
+
+  .project-menu
+    position: relative
+
+  .project-popup-menu
+    bottom: 20px
+    left: -35px
+
+  .hamburger-menu
+    display: flex
+
+
+@media (max-width: 620px)
+  .task-date-container
+    display: none
+
+  .close-modal-btn-container
+    button
+      font-size: 1.5rem
+
+@media (max-width: 420px)
+  .footer
+    font-size: 12px
