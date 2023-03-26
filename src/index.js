@@ -31,8 +31,6 @@ const checkLocalStorage = () => {
   if (tasks !== null || projects !== null) {
     dataController.setTaskCollection(tasks);
     dataController.setProjectCollection(projects);
-    console.table(dataController.getTaskCollection());
-    console.table(dataController.getProjectCollection());
     domController.populateTaskContainer(dataController.getTaskCollection());
     domController.populateProjectContainer(
       dataController.getProjectCollection()
