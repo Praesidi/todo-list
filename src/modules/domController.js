@@ -30,9 +30,7 @@ const domController = (() => {
         </div>
         <div class="task-date-container">
           <span id="task-date-el">${
-            task.dueDate === ''
-              ? 'Due Date: Not Selected'
-              : `Due Date: ${dueDate}`
+            task.dueDate === '' ? 'Due Date: Not Set' : `Due Date: ${dueDate}`
           }</span>
             </div>
         <div class="task-item-btns">
