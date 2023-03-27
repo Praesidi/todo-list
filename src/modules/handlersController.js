@@ -367,6 +367,7 @@ const handlersController = (() => {
           dataController.sortTaskCollection(projectID)
         );
       }
+      closeSidebarForMobiles();
     }
 
     if (target.id === 'inbox') {
@@ -376,6 +377,7 @@ const handlersController = (() => {
       domController.populateTaskContainer(
         dataController.sortTaskCollection('inbox')
       );
+      closeSidebarForMobiles();
     }
 
     if (target.id === 'today') {
@@ -385,6 +387,7 @@ const handlersController = (() => {
       domController.populateTaskContainer(
         dataController.sortTaskCollection('today')
       );
+      closeSidebarForMobiles();
     }
 
     if (target.id === 'upcoming') {
@@ -394,6 +397,7 @@ const handlersController = (() => {
       domController.populateTaskContainer(
         dataController.sortTaskCollection('upcoming')
       );
+      closeSidebarForMobiles();
     }
 
     if (target.id === 'completed') {
@@ -403,6 +407,7 @@ const handlersController = (() => {
       domController.populateTaskContainer(
         dataController.sortTaskCollection('completed')
       );
+      closeSidebarForMobiles();
     }
 
     if (target.id === 'important') {
@@ -412,8 +417,8 @@ const handlersController = (() => {
       domController.populateTaskContainer(
         dataController.sortTaskCollection('important')
       );
+      closeSidebarForMobiles();
     }
-    closeSidebarForMobiles();
   };
 
   document.addEventListener('click', (e) => {
