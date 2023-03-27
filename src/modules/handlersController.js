@@ -168,9 +168,16 @@ const handlersController = (() => {
       closeTaskModal();
     }
 
-    domController.populateTaskContainer(
-      dataController.sortTaskCollection(dataController.getCurrentProject())
-    );
+    if (currentPageMode !== 'project') {
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection(currentPageMode)
+      );
+    } else {
+      domController.populateTaskContainer(
+        dataController.sortTaskCollection(dataController.getCurrentProject())
+      );
+    }
+
     storageController.saveToLocalStorage(
       dataController.getTaskCollection(),
       dataController.getProjectCollection()
