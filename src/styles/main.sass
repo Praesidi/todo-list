@@ -24,11 +24,19 @@ $x-width: calc($hamburger-height * 1.41421356237)
   
 *
   box-sizing: border-box
+  -webkit-box-sizing: border-box
 
 body
   height: 100vh
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
+  -webkit-box-pack: justify
+  -ms-flex-pack: justify
   justify-content: space-between
   font-family: 'Noto Sans JP', sans-serif
   
@@ -38,22 +46,39 @@ h1, h2, h3
 
 /* Header */ 
 .header
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
   justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   background: $alt-primary-color
   padding: 0 20px
   height: $header-height
   
 .hamburger-menu-container
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
   justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
 
 .hamburger-menu
   display: none
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
   gap: $hamburger-gap
+  width: -webkit-max-content
+  width: -moz-max-content
   width: max-content
   position: absolute
   left: $hamburger-margin
@@ -69,10 +94,18 @@ h1, h2, h3
     height: $bar-height
     background-color: $foreground
     border-radius: 9999px
+    -webkit-transform-origin: left center
+    -ms-transform-origin: left center
     transform-origin: left center
+    -webkit-transition: opacity $animation-timing, width $animation-timing, background-color $animation-timing, -webkit-transform $animation-timing
+    transition: opacity $animation-timing, width $animation-timing, background-color $animation-timing, -webkit-transform $animation-timing
+    -o-transition: opacity $animation-timing, width $animation-timing, transform $animation-timing, background-color $animation-timing
     transition: opacity $animation-timing, width $animation-timing, transform $animation-timing, background-color $animation-timing
+    transition: opacity $animation-timing, width $animation-timing, transform $animation-timing, background-color $animation-timing, -webkit-transform $animation-timing
 
   input
+    -webkit-appearance: none
+    -moz-appearance: none
     appearance: none
     padding: 0
     margin: 0
@@ -80,11 +113,15 @@ h1, h2, h3
     pointer-events: none
 
   &:has(input:checked)::before 
+    -webkit-transform: rotate(45deg)
+    -ms-transform: rotate(45deg)
     transform: rotate(45deg)
     width: $x-width
     translate: 0 calc($bar-height / -2)
 
   &:has(input:checked)::after 
+    -webkit-transform: rotate(-45deg)
+    -ms-transform: rotate(-45deg)
     transform: rotate(-45deg)
     width: $x-width
     translate: 0 calc($bar-height / 2)
@@ -94,7 +131,11 @@ h1, h2, h3
     width: 0
 
 .logo-container
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
 
   img
@@ -114,11 +155,15 @@ h1, h2, h3
 
 /* Main */
 .main 
+  display: -ms-grid
   display: grid
+  -ms-grid-columns: (1fr)[12]
   grid-template-columns: repeat(12, 1fr)
 
 /* Main -> Sidebar */  
 .sidebar
+  -ms-grid-column: 1
+  -ms-grid-column-span: 3
   grid-column: 1 / 4
   display: block
   background: $extra-light-gray
@@ -126,6 +171,8 @@ h1, h2, h3
   padding: 15px 15px 30px
   overflow-y: scroll
   z-index: 9999
+  -webkit-transition: translate $animation-timing
+  -o-transition: translate $animation-timing
   transition: translate $animation-timing
 
   h2
@@ -136,20 +183,33 @@ h1, h2, h3
 
 /* Sidebar -> Menu Btns */ 
 .sidebar-btns-container
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   gap: 5px
   margin: 10px 0
 
   div
+    display: -webkit-box
+    display: -ms-flexbox
     display: flex
+    -webkit-box-pack: start
+    -ms-flex-pack: start
     justify-content: flex-start
     background: transparent
     border: none
     padding: 10px
     width: 100%
     letter-spacing: 1px
+    -webkit-transition: .3s
+    -o-transition: .3s
     transition: .3s
     cursor: pointer
 
@@ -163,6 +223,8 @@ h1, h2, h3
       
     &:active
       scale: 1
+      -webkit-transition: .1s
+      -o-transition: .1s
       transition: .1s
 
     i
@@ -186,7 +248,11 @@ h1, h2, h3
 /* Sidebar -> Projects */ 
 .add-project-btn-container,
 .add-task-btn-container
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
   justify-content: center
   width: 100%
   margin: 10px 0
@@ -197,6 +263,8 @@ h1, h2, h3
     background: transparent
     border: $gray dashed 2px
     border-radius: 5px
+    -webkit-transition: .2s
+    -o-transition: .2s
     transition: .2s
     cursor: pointer
 
@@ -211,6 +279,8 @@ h1, h2, h3
       
     &:active
       scale: 1
+      -webkit-transition: .1s
+      -o-transition: .1s
       transition: .1s
 
 .project-container
@@ -221,8 +291,14 @@ h1, h2, h3
 
 /* Projects -> Project Item 
 .project-item
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: justify
+  -ms-flex-pack: justify
   justify-content: space-between
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   width: 100%
   background: $light-gray
@@ -244,6 +320,7 @@ h1, h2, h3
     line-height: 1.5rem
     white-space: nowrap
     overflow: hidden
+    -o-text-overflow: ellipsis
     text-overflow: ellipsis
 
 /* Project Item -> PopUp Menu */
@@ -260,6 +337,8 @@ h1, h2, h3
 
     &:hover
       color: $primary-color
+      -webkit-transition: .2s
+      -o-transition: .2s
       transition: .2s
       scale: 1.2
 
@@ -267,12 +346,18 @@ h1, h2, h3
   visibility: visible
   position: absolute
   display: none
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
+  -webkit-box-pack: center
+  -ms-flex-pack: center
   justify-content: center
   padding: 5px
   gap: 5px
   border-radius: 5px
   background: $light-gray
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
 
   button
@@ -292,6 +377,8 @@ h1, h2, h3
       pointer-events: none
 
 .popup-active
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
 
 /* Style Sidebar Category/Project Cards if selected */
@@ -308,6 +395,8 @@ h1, h2, h3
 
 /* Main -> Container*/  
 .main-container
+  -ms-grid-column: 4
+  -ms-grid-column-span: 9
   grid-column: 4 / 13
   height: calc((100vh - $header-height) - $footer-height)
   overflow-y: scroll
@@ -329,6 +418,8 @@ h1, h2, h3
       
     &:active
       scale: 1
+      -webkit-transition: .1s
+      -o-transition: .1s
       transition: .1s
 
 #delete-tasks-btn
@@ -345,8 +436,14 @@ h1, h2, h3
 
 /* Task Container -> Task Item */
 .task-item
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: justify
+  -ms-flex-pack: justify
   justify-content: space-between
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   padding: 10px 20px
   margin: 15px 0
@@ -354,6 +451,7 @@ h1, h2, h3
   height: 40px
   background: $extra-light-gray
   border-radius: 5px
+  -webkit-box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px
 
 .task-low-priority
@@ -367,7 +465,11 @@ h1, h2, h3
 
 /* Task Item -> Title & Checkbox */
 .task-item-checkbox
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center 
   
   input[type='checkbox']
@@ -385,7 +487,10 @@ h1, h2, h3
     cursor: pointer
 
     &:checked 
+      -webkit-appearance: auto
+      -moz-appearance: auto
       appearance: auto
+      -webkit-clip-path: circle(50% at 50% 50%)
       clip-path: circle(50% at 50% 50%)
       background-color: $primary-color
 
@@ -409,8 +514,9 @@ h1, h2, h3
   button
     background: transparent
     border: none
-    // margin: 0 5px
     padding: 5px
+    -webkit-transition: .2s
+    -o-transition: .2s
     transition: .2s
     color: #9ca3af
     cursor: pointer
@@ -426,6 +532,8 @@ h1, h2, h3
 
     &:active
       scale: 1
+      -webkit-transition: .1s
+      -o-transition: .1s
       transition: .1s
 
   #delete-task
@@ -445,8 +553,14 @@ h1, h2, h3
 .footer 
   background: $light-gray
   height: $footer-height
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: center
+  -ms-flex-pack: center
   justify-content: center
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   font-family: 'Sono', sans-serif
   padding: 5px
@@ -459,7 +573,9 @@ h1, h2, h3
   a 
     text-decoration: none
     font-weight: 700
-    transition: 0.4s
+    -webkit-transition: .4s
+    -o-transition: .4s
+    transition: .4s
     color: $primary-color
 
     &:hover
@@ -474,6 +590,8 @@ h1, h2, h3
 #info-modal
   position: absolute
   top: 50%
+  -webkit-transform: translate(-50%, -50%)
+  -ms-transform: translate(-50%, -50%)
   transform: translate(-50%, -50%)
   left: 50%
   margin: 0
@@ -482,7 +600,20 @@ h1, h2, h3
   border: none
   border-radius: 15px
   background: $white
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+  -webkit-box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px 
+
+  &::-webkit-backdrop
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: rgba(50, 50, 50, 0.5)
+    -webkit-backdrop-filter: blur(5px)
+    backdrop-filter: blur(5px)
+    -webkit-animation: none
+    animation: none
 
   &::backdrop
     position: fixed
@@ -491,16 +622,24 @@ h1, h2, h3
     right: 0
     bottom: 0
     background: rgba(50, 50, 50, 0.5)
+    -webkit-backdrop-filter: blur(5px)
     backdrop-filter: blur(5px)
-    // backdrop-filter: blur(10px)
+    -webkit-animation: none
     animation: none
 
 .task-modal-content,
 .project-modal-content,
 .info-modal-content
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
-  align-items: center 
+  -webkit-box-align: center
+  -ms-flex-align: center
+  align-items: center
   width: 100%
   height: 100%
 
@@ -508,7 +647,11 @@ h1, h2, h3
     margin-bottom: 20px
 
 .info-modal-line 
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: start
+  -ms-flex-pack: start
   justify-content: flex-start
   width: 100%
   padding: 0 15px
@@ -518,20 +661,27 @@ h1, h2, h3
     margin-right: 10px
   
   p:nth-of-type(2)
-    //font-style: italic
     color: $dark-gray 
 
 /* Modal -> Close Modal Button*/
 .close-modal-btn-container
   width: 100%
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-pack: end
+  -ms-flex-pack: end
   justify-content: flex-end
 
   button
     background: transparent
     border: none
     padding: 5px 10px
+    -webkit-transform-origin: center
+    -ms-transform-origin: center
     transform-origin: center
+    -webkit-transition: .2s
+    -o-transition: .2s
     transition: .2s
     font-size: 1.3rem
     color: $red
@@ -539,6 +689,7 @@ h1, h2, h3
 
     &:hover
       scale: 1.2
+      -webkit-filter: brightness(1.1)
       filter: brightness(1.1)
 
       &:focus
@@ -551,9 +702,18 @@ h1, h2, h3
 /* Modal -> New Project Form*/
 #task-form,
 #project-form
+  display: -webkit-box
+  display: -ms-flexbox
   display: flex
+  -webkit-box-orient: vertical
+  -webkit-box-direction: normal
+  -ms-flex-direction: column
   flex-direction: column
+  -webkit-box-pack: space-evenly
+  -ms-flex-pack: space-evenly
   justify-content: space-evenly
+  -webkit-box-align: center
+  -ms-flex-align: center
   align-items: center
   width: 80%
 
@@ -575,6 +735,9 @@ h1, h2, h3
     letter-spacing: 1px  
     margin-bottom: 5px  
 
+  textarea
+    resize: vertical
+
   button[type='submit']
     margin-top: 25px
     width: 140px
@@ -583,9 +746,12 @@ h1, h2, h3
     background: $white
     color: $primary-color
     border: $light-gray solid 1px
+    -webkit-box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px
     box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px
     font-weight: 500
     letter-spacing: 1px
+    -webkit-transition: .2s
+    -o-transition: .2s
     transition: .2s
     cursor: pointer
 
@@ -597,14 +763,19 @@ h1, h2, h3
       
     &:active
       scale: 1
+      -webkit-transition: .1s
+      -o-transition: .1s
       transition: .1s 
 
 @media (max-width: 860px)
   .main-container
+    -ms-grid-column: 1
+    -ms-grid-column-span: 12
     grid-column: 1 / 13
 
   .sidebar
     position: absolute
+    -webkit-box-shadow: 5px 0 10px -2px $gray
     box-shadow: 5px 0 10px -2px $gray
     display: none
 
@@ -616,6 +787,8 @@ h1, h2, h3
     left: -35px
 
   .hamburger-menu
+    display: -webkit-box
+    display: -ms-flexbox
     display: flex
 
 @media (max-width: 620px)
