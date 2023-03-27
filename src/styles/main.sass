@@ -498,6 +498,12 @@ h1, h2, h3
   p
     margin: 0
     letter-spacing: 1px
+    width: 400px
+    white-space: nowrap
+    overflow: hidden
+    -o-text-overflow: ellipsis
+    text-overflow: ellipsis
+    
 
 .task-date-container
   font-family: 'Sono', sans-serif
@@ -648,21 +654,37 @@ h1, h2, h3
     margin-bottom: 20px
 
 .info-modal-line 
-  display: -webkit-box
-  display: -ms-flexbox
-  display: flex
-  -webkit-box-pack: start
-  -ms-flex-pack: start
-  justify-content: flex-start
   width: 100%
   padding: 0 15px
+  margin: 10px 0
+  vertical-align: middle
+
+  p
+    display: inline-block
+    vertical-align: top
+    margin: 5px 0
   
+  // title
   p:first-of-type
     font-weight: 500
     margin-right: 10px
   
+  // content
   p:nth-of-type(2)
     color: $dark-gray 
+
+#info-modal-title
+  white-space: nowrap
+  overflow: hidden
+  -o-text-overflow: ellipsis
+  text-overflow: ellipsis
+  max-width: 300px
+
+#info-modal-description
+  overflow-y: scroll
+  overflow-wrap: break-word
+  max-height: 100px
+  max-width: 300px
 
 /* Modal -> Close Modal Button*/
 .close-modal-btn-container
@@ -768,6 +790,11 @@ h1, h2, h3
       -o-transition: .1s
       transition: .1s 
 
+@media (max-width: 1150px)
+  .task-item-checkbox
+    p
+      width: 250px
+
 @media (max-width: 860px)
   .main-container
     -ms-grid-column: 1
@@ -792,6 +819,10 @@ h1, h2, h3
     display: -ms-flexbox
     display: flex
 
+  .task-item-checkbox
+    p
+      width: 300px
+
 @media (max-width: 620px)
   .task-date-container
     display: none
@@ -799,6 +830,10 @@ h1, h2, h3
   .close-modal-btn-container
     button
       font-size: 1.5rem
+
+  .task-item-checkbox
+    p
+      width: 200px
 
 @media (max-width: 420px)
   .footer
@@ -816,3 +851,7 @@ h1, h2, h3
     scale: 1.25
     &:hover
       scale: 1.3
+
+  .task-item-checkbox
+    p
+      width: 130px
