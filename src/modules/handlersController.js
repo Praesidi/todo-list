@@ -337,7 +337,7 @@ const handlersController = (() => {
 
   // close the sidebar when the user selects category or project
   const closeSidebarForMobiles = () => {
-    if (window.matchMedia('screen and (max-width:420px)').matches) {
+    if (window.matchMedia('screen and (max-width:440px)').matches) {
       hamburgerMenuBtn.checked = false;
       sidebar.style.display = 'none';
     }
